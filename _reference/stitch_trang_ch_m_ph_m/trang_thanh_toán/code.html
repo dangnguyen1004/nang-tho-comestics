@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hasaki Clone - Thanh toán</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b8c",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221019",
+                        "text-main": "#1b0d14",
+                        "text-dark": "#fcf8fa",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+    width: 8px
+    }
+::-webkit-scrollbar-track {
+    background: #f1f1f1
+    }
+::-webkit-scrollbar-thumb {
+    background: #d4a5bd;
+    border-radius: 4px
+    }
+.form-radio:checked {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCMe-G_Tg7AHKJHt50JNnBho4jur0KIva4VJJXAaVP9PzBaTq-V8Xm556N3wLWa_nfg2UxprkBNG028Gf7kKKmg2N71t8yG4bV4zhJsR2xT_fIQBTgXoHUonPliuOYEiVyDr34_UJvvQ7O3u7DCGQSRI4ZrtS_a-ujdFIdph2jdzogSESJB5-ZJ6pcgc74Y6U2wHFayMUdewnYEkaWnQiwDI4le-8sHt4Aw1DTA6qF7YEB_j89jrJTkyWDfGR3hFTCHLrzH_3UWRJI);
+    background-color: #ee2b8c;
+    border-color: #ee2b8c
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-text-dark font-display antialiased min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="bg-white dark:bg-[#2f1b25] border-b border-[#f3e7ed] dark:border-gray-800 sticky top-0 z-50">
+<div class="max-w-[1200px] mx-auto px-4 lg:px-8 py-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<a class="flex items-center gap-2 text-primary" href="#">
+<span class="material-symbols-outlined text-3xl">spa</span>
+<h2 class="text-xl font-extrabold tracking-tight text-text-main dark:text-white">Hasaki Clone</h2>
+</a>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Trang chủ</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Sản phẩm</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Khuyến mãi</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Giỏ hàng</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center justify-center h-9 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-pink-700 transition-colors">
+                        Đăng nhập
+                    </button>
+<div class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Breadcrumbs -->
+<div class="bg-white/50 dark:bg-white/5 border-b border-[#f3e7ed] dark:border-gray-800">
+<div class="max-w-[1200px] mx-auto px-4 lg:px-8 py-3">
+<div class="flex items-center text-sm font-medium">
+<a class="text-gray-500 hover:text-primary dark:text-gray-400" href="#">Giỏ hàng</a>
+<span class="mx-2 text-gray-400">/</span>
+<span class="text-primary font-bold">Thanh toán</span>
+<span class="mx-2 text-gray-400">/</span>
+<span class="text-gray-400 dark:text-gray-600">Hoàn tất</span>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1200px] mx-auto px-4 lg:px-8 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+<!-- Left Column: Forms -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Login Prompt (Conditional) -->
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+<p class="text-sm text-gray-700 dark:text-gray-200">Bạn đã có tài khoản?</p>
+</div>
+<button class="text-primary text-sm font-bold hover:underline">Đăng nhập ngay</button>
+</div>
+<!-- Section 1: Customer Info -->
+<section>
+<div class="flex items-center gap-3 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold">1</span>
+<h2 class="text-xl font-bold">Thông tin giao hàng</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Họ và tên</label>
+<input class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm" placeholder="Nhập họ tên của bạn" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Số điện thoại</label>
+<input class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm" placeholder="Ví dụ: 0912345678" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 mb-4">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Email (Để nhận thông báo đơn hàng)</label>
+<input class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm" placeholder="example@email.com" type="email"/>
+</div>
+<div class="flex flex-col gap-1.5 mb-4">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Địa chỉ cụ thể</label>
+<input class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm" placeholder="Số nhà, tên đường, tòa nhà..." type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Tỉnh / Thành phố</label>
+<select class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm">
+<option>Hồ Chí Minh</option>
+<option>Hà Nội</option>
+<option>Đà Nẵng</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Quận / Huyện</label>
+<select class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm">
+<option>Chọn Quận/Huyện</option>
+<option>Quận 1</option>
+<option>Quận 3</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300">Phường / Xã</label>
+<select class="h-11 px-4 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary w-full text-sm">
+<option>Chọn Phường/Xã</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Section 2: Shipping Method -->
+<section>
+<div class="flex items-center gap-3 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold">2</span>
+<h2 class="text-xl font-bold">Phương thức vận chuyển</h2>
+</div>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary transition-colors bg-white dark:bg-gray-800 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 text-primary border-gray-300 focus:ring-primary" name="shipping" type="radio"/>
+<div>
+<div class="font-bold text-sm">Giao hàng tiêu chuẩn</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Nhận hàng vào 24 Thg 10 - 26 Thg 10</div>
+</div>
+</div>
+<span class="font-bold text-primary">15.000đ</span>
+</label>
+<label class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary transition-colors bg-white dark:bg-gray-800 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary" name="shipping" type="radio"/>
+<div>
+<div class="flex items-center gap-2">
+<div class="font-bold text-sm">Giao hàng hỏa tốc (NowShip)</div>
+<span class="bg-orange-100 text-orange-600 text-[10px] font-bold px-2 py-0.5 rounded">GẤP</span>
+</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Nhận hàng trong 2 giờ</div>
+</div>
+</div>
+<span class="font-bold text-primary">35.000đ</span>
+</label>
+</div>
+</section>
+<!-- Section 3: Payment Method -->
+<section>
+<div class="flex items-center gap-3 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold">3</span>
+<h2 class="text-xl font-bold">Phương thức thanh toán</h2>
+</div>
+<div class="grid gap-3">
+<label class="relative flex items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary bg-white dark:bg-gray-800 has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary transition-all">
+<input checked="" class="w-5 h-5 text-primary border-gray-300 focus:ring-primary mr-4" name="payment" type="radio"/>
+<span class="material-symbols-outlined text-gray-500 mr-3 text-2xl">local_shipping</span>
+<div class="flex-1">
+<div class="font-bold text-sm">Thanh toán khi nhận hàng (COD)</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Bạn chỉ phải thanh toán khi nhận được hàng.</div>
+</div>
+</label>
+<label class="relative flex items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary bg-white dark:bg-gray-800 has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary transition-all">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary mr-4" name="payment" type="radio"/>
+<img alt="Momo Logo" class="w-8 h-8 rounded object-contain mr-3 bg-white p-0.5 border border-gray-100" data-alt="Momo pink logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbuMkIw_s5BnQ1xf5IV5v-Xn4wF_cmt5dfeltaEuijXCEgtsKUJpTN-VqiIeQLn-ocy5Rnvul-xcrdKih4xTaKuaqq6R3JiSpVWomOT3ucrzaG0XhKs5pFhDGVZlP8Qq6EUpvY0YjMs42AZlbmplIsCqm1iWk_Gjk-c4E2kPWL57zcZHo9ycD1vV_Fana7rR_ebKP9_HKjmtNlktViOBj9uYrX-UO4gK5xQHJzzEaaP9DKJjVrhqzHG1ct_sHpS36cmwKk4FGLNw8"/>
+<div class="flex-1">
+<div class="font-bold text-sm">Ví điện tử MoMo</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Quét mã QR để thanh toán.</div>
+</div>
+</label>
+<label class="relative flex items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary bg-white dark:bg-gray-800 has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary transition-all">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary mr-4" name="payment" type="radio"/>
+<img alt="ZaloPay Logo" class="w-8 h-8 rounded object-contain mr-3 bg-white p-0.5 border border-gray-100" data-alt="ZaloPay green and blue text logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBD8VlWFvi8P4gB-6JqJ41swQNoBnfinzNADHJqIB_PNb_tBtgNLFxC5ZMvd7ozvzLMerzXtQfuTHbJPS4SlaUQCjUOBmUvgofg5JAww70q2LeIDzp70mcyuvTkYdh5IpwLvvKrC9P05HPD9QcC-TOLbanAE-iOOQGtUoyGEya0ToNWYQKE9cf039barg8su3pyb4siKptwLcB9zf_B-DXOeOGX468hp-jIdy2b0BnSOZtiIDXlOjlMtCAZk1-7FYPkdoBVYIJvug"/>
+<div class="flex-1">
+<div class="font-bold text-sm">Ví ZaloPay</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Giảm thêm 10k cho đơn từ 200k.</div>
+</div>
+</label>
+<label class="relative flex items-center p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary bg-white dark:bg-gray-800 has-[:checked]:border-primary has-[:checked]:ring-1 has-[:checked]:ring-primary transition-all">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary mr-4" name="payment" type="radio"/>
+<span class="material-symbols-outlined text-gray-500 mr-3 text-2xl">account_balance</span>
+<div class="flex-1">
+<div class="font-bold text-sm">Chuyển khoản ngân hàng</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Vietcombank, Techcombank, ACB...</div>
+</div>
+</label>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary (Sticky) -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 space-y-4">
+<!-- Order Card -->
+<div class="bg-white dark:bg-[#2f1b25] rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+<div class="p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+<h3 class="font-bold text-lg">Đơn hàng (2 sản phẩm)</h3>
+</div>
+<!-- Product List -->
+<div class="p-4 flex flex-col gap-4 max-h-[300px] overflow-y-auto">
+<!-- Item 1 -->
+<div class="flex gap-3">
+<div class="w-16 h-16 rounded border border-gray-200 dark:border-gray-700 overflow-hidden shrink-0 bg-white">
+<img alt="Serum bottle" class="w-full h-full object-cover" data-alt="Small amber cosmetic serum bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUm6c7Jq9S8Xhd8REnSU8TrtrlPGQdwvzftwVi89Nu_j87vkXDoXy1nf0cHvHQa_EtLzn_LOLUlGDj3n_ckh_66rRDdMQz_bT-SRjJa_jrmSRpwP9-dpT0Y4zAn1K7i_pjhDZd-D-NFRf8Le2eUoUr29sXTzuqTbDIHkweCfbJMrGioRSuyJQxnpe2dCbbkUpsfbvnBqA1LSgBMbzPwfT5UFPfadT2B1BY6o5jA_M9CdIFcfgPMD_7XDSGhA8uCOnA3LOD2BQRmv0"/>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-medium line-clamp-2">Tinh chất La Roche-Posay Hyalu B5 Serum 30ml</h4>
+<div class="flex justify-between items-center mt-1">
+<span class="text-xs text-gray-500">x1</span>
+<span class="text-sm font-bold">850.000đ</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-3">
+<div class="w-16 h-16 rounded border border-gray-200 dark:border-gray-700 overflow-hidden shrink-0 bg-white">
+<img alt="Cream jar" class="w-full h-full object-cover" data-alt="White cosmetic cream jar on pink background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPtNbBr0DgD3OS48ksWoOYrcRqdZyBmkhH7EbrtCbnKzlbgaHPKoAncy34L5foSFyzuvwzFSZJJI7qlBvRXfg-vSoMblGBXFvX9HiFBiJEWfj59dx-SL3asf8Uz4v1ikO-MKkCv5RjzQZ8cj9yf9tVtP_9QGdjMtU4FMb9FH_bA-p3WhmNNUe8CdgrqfqUNIK7tKFdd3e86Ge3o2gOLdMtwL9lrXCJjxkiuH6TyUysIube2PlGhbg0IIHxzU7wdCo6GfsY7pGa9tk"/>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-medium line-clamp-2">Kem Dưỡng Ẩm Neutrogena Hydro Boost Water Gel 50g</h4>
+<div class="flex justify-between items-center mt-1">
+<span class="text-xs text-gray-500">x1</span>
+<span class="text-sm font-bold">350.000đ</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Coupon -->
+<div class="px-4 pb-4 border-b border-gray-100 dark:border-gray-700">
+<div class="flex gap-2">
+<input class="flex-1 h-10 px-3 rounded text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-800 focus:border-primary focus:ring-primary uppercase" placeholder="Mã giảm giá" type="text"/>
+<button class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-2 rounded text-sm font-bold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Áp dụng</button>
+</div>
+</div>
+<!-- Calculations -->
+<div class="p-4 space-y-2 text-sm">
+<div class="flex justify-between text-gray-600 dark:text-gray-400">
+<span>Tạm tính</span>
+<span>1.200.000đ</span>
+</div>
+<div class="flex justify-between text-gray-600 dark:text-gray-400">
+<span>Phí vận chuyển</span>
+<span>15.000đ</span>
+</div>
+<div class="flex justify-between text-green-600">
+<span>Giảm giá</span>
+<span>-0đ</span>
+</div>
+</div>
+<!-- Total -->
+<div class="p-4 bg-primary/5 dark:bg-white/5 border-t border-primary/10 dark:border-gray-700">
+<div class="flex justify-between items-end">
+<span class="font-bold text-gray-800 dark:text-white">Tổng cộng</span>
+<div class="text-right">
+<span class="block text-2xl font-extrabold text-primary">1.215.000đ</span>
+<span class="text-[10px] text-gray-500">(Đã bao gồm VAT)</span>
+</div>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full bg-primary hover:bg-pink-600 text-white font-bold py-3.5 rounded-lg shadow-lg shadow-pink-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span>ĐẶT HÀNG</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<p class="text-[10px] text-center text-gray-400 mt-2">
+                                Bằng việc tiến hành đặt hàng, bạn đồng ý với các <a class="underline hover:text-primary" href="#">Điều khoản dịch vụ</a> của chúng tôi.
+                            </p>
+</div>
+</div>
+<!-- Trust Badges -->
+<div class="flex justify-center gap-4 grayscale opacity-60">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="text-[10px] font-semibold">Bảo mật tuyệt đối</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span class="text-[10px] font-semibold">Chính hãng 100%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="mt-12 py-6 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#2f1b25]">
+<div class="max-w-[1200px] mx-auto px-4 text-center text-sm text-gray-500">
+<p>© 2023 Hasaki Clone. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

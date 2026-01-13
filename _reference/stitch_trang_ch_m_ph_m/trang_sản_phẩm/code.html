@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trang Sản Phẩm - Hasaki Clone</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b8c",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221019",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        /* Custom scrollbar for sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ee2b8c;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#1b0d14] dark:text-gray-100 flex flex-col min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-white dark:bg-[#1a0b12] border-b border-[#f3e7ed] dark:border-gray-800 shadow-sm">
+<div class="container mx-auto px-4 lg:px-8 py-3">
+<div class="flex items-center justify-between gap-8">
+<!-- Logo -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="size-10 text-primary flex items-center justify-center bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-3xl">spa</span>
+</div>
+<div class="hidden md:block">
+<h1 class="text-2xl font-bold tracking-tight text-primary">Hasaki <span class="text-gray-800 dark:text-white text-base font-medium">Clone</span></h1>
+</div>
+</a>
+<!-- Search Bar -->
+<div class="hidden md:flex flex-1 max-w-2xl">
+<div class="flex w-full items-stretch rounded-lg bg-[#f3e7ed] dark:bg-gray-800 h-11 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-primary/50">
+<div class="flex items-center justify-center pl-4 text-primary dark:text-gray-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-[#1b0d14] dark:text-white placeholder:text-gray-500 px-4 text-sm font-medium" placeholder="Tìm kiếm sản phẩm, thương hiệu..."/>
+<button class="bg-primary hover:bg-pink-600 text-white px-6 font-bold text-sm transition-colors">
+                            Tìm kiếm
+                        </button>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3 sm:gap-4">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-pink-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 transition-colors relative group">
+<span class="material-symbols-outlined">favorite</span>
+<span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-pink-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 transition-colors relative group">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white dark:border-[#1a0b12]">3</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-pink-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Search (Visible on small screens) -->
+<div class="md:hidden px-4 pb-3 pt-1">
+<div class="flex w-full items-stretch rounded-lg bg-[#f3e7ed] dark:bg-gray-800 h-10 overflow-hidden">
+<div class="flex items-center justify-center pl-3 text-primary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-[#1b0d14] placeholder:text-gray-500 px-3 text-sm" placeholder="Tìm kiếm..."/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="container mx-auto px-4 lg:px-8 py-6 flex-grow">
+<!-- Breadcrumbs -->
+<nav class="flex text-sm font-medium text-gray-500 mb-6 overflow-x-auto whitespace-nowrap pb-2">
+<a class="hover:text-primary transition-colors" href="#">Trang chủ</a>
+<span class="mx-2">/</span>
+<a class="hover:text-primary transition-colors" href="#">Mỹ phẩm</a>
+<span class="mx-2">/</span>
+<span class="text-primary font-bold">Chăm sóc da</span>
+</nav>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-1/4 flex-shrink-0 space-y-8">
+<!-- Categories -->
+<div class="bg-white dark:bg-[#2c1621] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-gray-900 dark:text-white">
+<span class="material-symbols-outlined text-primary">category</span>
+                        Danh mục
+                    </h3>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center justify-between group p-2 rounded-lg bg-pink-50/50 dark:bg-primary/10 text-primary font-bold" href="#">
+<span>Chăm sóc da mặt</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</a>
+<ul class="ml-4 mt-2 space-y-2 border-l-2 border-pink-100 dark:border-gray-700 pl-3">
+<li><a class="text-gray-600 dark:text-gray-300 hover:text-primary text-sm py-1 block" href="#">Sữa rửa mặt (120)</a></li>
+<li><a class="text-gray-600 dark:text-gray-300 hover:text-primary text-sm py-1 block" href="#">Toner / Nước hoa hồng (85)</a></li>
+<li><a class="text-primary font-medium text-sm py-1 block" href="#">Serum / Tinh chất (200)</a></li>
+<li><a class="text-gray-600 dark:text-gray-300 hover:text-primary text-sm py-1 block" href="#">Kem dưỡng ẩm (150)</a></li>
+</ul>
+</li>
+<li><a class="flex items-center justify-between text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors" href="#"><span>Trang điểm</span><span class="text-gray-400 text-xs">342</span></a></li>
+<li><a class="flex items-center justify-between text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors" href="#"><span>Chăm sóc cơ thể</span><span class="text-gray-400 text-xs">129</span></a></li>
+<li><a class="flex items-center justify-between text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors" href="#"><span>Chăm sóc tóc</span><span class="text-gray-400 text-xs">89</span></a></li>
+</ul>
+</div>
+<!-- Price Filter -->
+<div class="bg-white dark:bg-[#2c1621] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<h3 class="font-bold text-lg mb-4 text-gray-900 dark:text-white">Mức giá</h3>
+<div class="space-y-4">
+<!-- Visual slider placeholder -->
+<div class="h-1.5 w-full bg-gray-200 dark:bg-gray-700 rounded-full relative mt-2">
+<div class="absolute left-1/4 right-1/4 top-0 bottom-0 bg-primary rounded-full"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-primary rounded-full shadow cursor-pointer"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-primary rounded-full shadow cursor-pointer"></div>
+</div>
+<div class="flex items-center gap-2 text-sm text-gray-500">
+<div class="w-1/2">
+<label class="text-xs mb-1 block">Từ (₫)</label>
+<input class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-sm focus:border-primary focus:ring-primary" type="number" value="150000"/>
+</div>
+<div class="pt-5">-</div>
+<div class="w-1/2">
+<label class="text-xs mb-1 block">Đến (₫)</label>
+<input class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-sm focus:border-primary focus:ring-primary" type="number" value="850000"/>
+</div>
+</div>
+<button class="w-full py-2 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-lg text-sm font-bold transition-colors">
+                            Áp dụng
+                        </button>
+</div>
+</div>
+<!-- Brands Filter -->
+<div class="bg-white dark:bg-[#2c1621] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">Thương hiệu</h3>
+<div class="relative mb-3">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-400 text-sm">search</span>
+<input class="w-full pl-9 pr-3 py-2 text-sm border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 focus:border-primary focus:ring-primary" placeholder="Tìm thương hiệu..." type="text"/>
+</div>
+<div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-2">
+<label class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span>La Roche-Posay</span>
+<span class="ml-auto text-xs text-gray-400">(45)</span>
+</label>
+<label class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span>Vichy</span>
+<span class="ml-auto text-xs text-gray-400">(23)</span>
+</label>
+<label class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span>Cocoon</span>
+<span class="ml-auto text-xs text-gray-400">(67)</span>
+</label>
+<label class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span>L'Oreal Paris</span>
+<span class="ml-auto text-xs text-gray-400">(89)</span>
+</label>
+<label class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span>Klairs</span>
+<span class="ml-auto text-xs text-gray-400">(12)</span>
+</label>
+<label class="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-primary">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span>Skin1004</span>
+<span class="ml-auto text-xs text-gray-400">(34)</span>
+</label>
+</div>
+</div>
+<!-- Stock Filter -->
+<div class="bg-white dark:bg-[#2c1621] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center justify-between">
+<span class="font-medium text-gray-900 dark:text-white">Chỉ hiện hàng có sẵn</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</aside>
+<!-- Product Grid Area -->
+<div class="flex-1 min-w-0">
+<!-- Page Heading & Controls -->
+<div class="bg-white dark:bg-[#2c1621] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 mb-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-2xl font-bold text-[#1b0d14] dark:text-white">Sản phẩm Chăm sóc da</h2>
+<p class="text-sm text-gray-500 mt-1">Tìm thấy <span class="text-primary font-bold">1,240</span> sản phẩm</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-3">
+<!-- Inner Search -->
+<div class="relative min-w-[200px]">
+<input class="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm focus:ring-primary focus:border-primary" placeholder="Tìm trong danh mục..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">search</span>
+</div>
+<!-- Sort Dropdown -->
+<div class="relative min-w-[180px]">
+<select class="w-full pl-3 pr-10 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:ring-primary focus:border-primary appearance-none cursor-pointer">
+<option>Phổ biến nhất</option>
+<option>Bán chạy nhất</option>
+<option>Hàng mới về</option>
+<option>Giá: Thấp đến Cao</option>
+<option>Giá: Cao đến Thấp</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[20px]">sort</span>
+</div>
+</div>
+</div>
+<!-- Active Filters Tags -->
+<div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-pink-50 dark:bg-pink-900/30 text-primary text-xs font-bold border border-pink-100 dark:border-pink-800">
+                            La Roche-Posay <button class="hover:text-red-500"><span class="material-symbols-outlined text-[14px] pt-1">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-pink-50 dark:bg-pink-900/30 text-primary text-xs font-bold border border-pink-100 dark:border-pink-800">
+                            150k - 850k <button class="hover:text-red-500"><span class="material-symbols-outlined text-[14px] pt-1">close</span></button>
+</span>
+<button class="text-xs text-gray-500 underline hover:text-primary">Xóa tất cả</button>
+</div>
+</div>
+<!-- Products Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+<!-- Product Card 1 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<!-- Discount Badge -->
+<div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">-25%</div>
+<!-- Image -->
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="La Roche-Posay blue bottle cleanser" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-1Oa5odzyOBtopeL-DwW6ACTIwh5YQ1CWsMwLaYssMmfsbtyZSkB2tBD7lPR6U7ftwzoCPUw2etjIMMo_81A6hLla-2Ylz-GRyl3NQl7-iqDDmn0wDpCQXWoXqMD9CkIJ3FOgrJHI5PJ6x0bVAcFnLQRn7_GPGTGuNLuMVJgn2BW7SWiAEgRpRHXE9Lvy3UBPCT7dzw7CieZ_XclwhudnWEsk6ennuF_ww4F8FxVGE9sZpGSMd5r-n8Bx5EQt9QumZPKDzzy95UY"/>
+<!-- Quick Actions (Hover) -->
+<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-white/90 to-transparent pt-10 flex justify-center gap-2">
+<button class="bg-white text-gray-800 shadow-md p-2 rounded-full hover:bg-primary hover:text-white transition-colors" title="Xem nhanh">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="bg-white text-gray-800 shadow-md p-2 rounded-full hover:bg-primary hover:text-white transition-colors" title="Yêu thích">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="France" class="w-4 h-auto shadow-sm" data-alt="France Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfX-Nw3febyM0-WbQvSr7T2nRi6IF8FHP-jB0V7XpCYPZMaKEeq3URtGNj7_jTOhADbSg2BHX6apgqCioxqcfc1s85aW1vZ3VX_zec3twBT43FLmZCSBs7K_iuKwkPeCdfksfRq8ww-zay2F0fLVJO91WVPwfEPrAlriVI-CsY1EQaOFNN_2eduaDdFAICGSAye_rUWaiff1rdtC6UVhbWpfH4775YDFGgJ5U1ol3hhqdd2K-WVu_kQpqED8e3YhzP2_94hsa1DQk"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">La Roche-Posay</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Nước Tẩy Trang La Roche-Posay Cho Da Dầu Nhạy Cảm 400ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star_half</span>
+</div>
+<span class="text-[10px] text-gray-400">(456)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">385.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">515.000 ₫</span>
+</div>
+<div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute bottom-4 left-4 right-4 bg-white dark:bg-[#2c1621] md:relative md:opacity-100 md:bottom-0 md:left-0 md:right-0 md:bg-transparent">
+<button class="w-full bg-primary hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm shadow-lg md:shadow-none shadow-pink-200">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                        Thêm vào giỏ
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-gray-800 text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">Bán chạy</div>
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Yellow Cocoon toner bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn7SUVtUc779y3DSfEI3sJHRJgtKmcBGIiVyIZdxf1H4-PWKWjmN9lU1_GwNg3WdCsStnAHFa4cFj6B_DWHWxppGHnKBjjPjoHevCJXOqnr4JgKmW_SmHmsOKXwy4gt7ZOyJ_9DAAEexncxSBtogK06vnVMVwgMNHsYZnlSS7w9VqK-_CwpmKRnxqToktIpQiRybBoFsrJ5NlKfwXnLE0rJ7FmE_ix921AN4boV9pOQUoXVBdfmDduyMFLqLm8_pM0nzsVzFTYfdQ"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="Vietnam" class="w-4 h-auto shadow-sm" data-alt="Vietnam Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAELObnX3Y5Nv2-xkdNVlYeXTAqikIKSGwK86bRBPllizwEv7d8tLich3XQ0cq1mP6brm9XhbfbFtbDeE8Lttqoz1LgSaYMXSkX8USwxueGh7lt324Z586vkeI5uO7yU0OoYHfqkW9WTbEaOebzUMS3cwwQhLtrPZnEge8-VNtKGKe3-TcJTfH88kMLXbMClbnikztMBKxnRX6NZ93aoUME2B8VMHUgJrexCY4X1rECSYzHJAresn5t_RmFlXa62pFdvbizYu7tWUY"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Cocoon</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Nước Bí Đao Cocoon Cân Bằng Da Giảm Dầu Mụn 140ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+</div>
+<span class="text-[10px] text-gray-400">(1,2k)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">175.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">195.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    Thêm vào giỏ
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">-10%</div>
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Vichy Mineral 89 bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxKX1EJBHjIl2ba57lwslfBZIvcbaYJ6m_jBw2JE6SuT4XlXyuhoKMyjt9F0CRtGrJQ5Tr0zTrgZMjNBzV1EIEQj_wLxinUgzB4qUPJh5gew4-s9yFzTK6HWEFWnaZ09LpoP9MAKw74iByusMmvH7nq-5iFm2nNZcLov-V7ztF5ahjUy3LDaxyrsSClYXikaVycwi_XjgRZnge7mUU_vqXoHOZ-m_aqKKJnK3Y-8ig_ST3So6JKVeDP1ebRIXZga5Jp-7pSXQzf6g"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="France" class="w-4 h-auto shadow-sm" data-alt="France Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADJc6U3WrGOsCK0g5Rs3Zyk4lct9ODQ0F_1y4aZ_AmDKt-_Rbf9iuC1jxFASIJtaw4ZBzxQWOrUEgg5YgCfUvBHIliCTJow7RrqA-paQ9B2krv02wtMqPD-vQu8OAK9PUvknI1VRgcrRezGRvNtrYOOT1s7Vv7MZVBhB4wE2Piav8j__CJOYtv4YXDuaWHAL9Kfp0-1piQw26Q2AsuEmXoD3iT2Vwo77r4IDIBGT5WRuYv1o2XE4VBmH2NMd0vmUUbLQmfJdpFFzg"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Vichy</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Dưỡng Chất Khoáng Cô Đặc Vichy Mineral 89 Phục Hồi Da 50ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] text-gray-300">star</span>
+</div>
+<span class="text-[10px] text-gray-400">(89)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">625.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">695.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    Thêm vào giỏ
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">-35%</div>
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Klairs Supple Preparation Toner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6-b7VKRiQV5mYjVp7i6tWjZ84ZuQHftV7rXAvMMhB8ezO7ThmB9667dfS0oEVR8uhcHhBFvs-YQu_00xDZhERLMAhr1mZiN6wRYI6jXkc5gqkz2oyElC_4w7KmO5nLKTRz1YqCcSmsZcy6B95GVHBmj2QXEMdM3mkF0kEzZSBs9riQ8e_tApBdPuzYUtdu7cBiu3pJ-nmP1YHzEjv7mvW9TtrvOaZm2YgcOIiwtWWmZ4Ah_gMKNPLXpuSx6N5IPtNB26KiOhdl-4"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="Korea" class="w-4 h-auto shadow-sm" data-alt="Korea Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuu65XMvoN-U5QcuygaNOQs6j-VAOUeWoOEj7WpyYGF7rTNmCjlf3Z7V96o60l0rpEWSQgnOADuLt2DS9IW8NF4txXUyL3FUk3gnrYEq3QJGudxjuQoXmPMTGoscvYGJ0RWejA_d3z88Pk2xJ6UMfJ6cotE8AH1mnjUHkD4Hhu5esdbCzmDPPdyty_jxZJZ42xMkdGUyYq8LrVsjNFieqTSLVOQNmBZw2t9HSuORsaXA6gGweKAmdHXWZBd1QZt9PWf2kEqiSBW-Y"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Dear, Klairs</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Nước Hoa Hồng Klairs Không Mùi Cho Da Nhạy Cảm 180ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+</div>
+<span class="text-[10px] text-gray-400">(330)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">285.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">430.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    Thêm vào giỏ
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-gray-500 text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">Hết hàng</div>
+<!-- Grayscale filter for out of stock -->
+<div class="absolute inset-0 bg-white/50 z-[1] pointer-events-none"></div>
+<img class="w-full h-full object-contain grayscale opacity-60" data-alt="Skin1004 Centella Ampoule" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAno_Swaajl8_RHnpGAa8aBFbViYBmvNZ3JH3DJpg3B742kn4rP5YHevXeesLMKaq-iJyUbijXuq1GxRXYJKoifzhO4ek-dJpweJlqYwGmslxNQRieZXhEnDmHz0RNFr-u-r4OzKDAD8OOJiDwP5vg6ao2-mDWLWYwEGVkfBOS1d0WBnO85-i5lhIcuIEdfVnJa1WIpXbBQ6YK-7vYQ3bmzeWPDLXfLp0gAj0eQYjutaptEpt0TDI8aYdyOFLEaGydH7kenn8pXhYY"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="Korea" class="w-4 h-auto shadow-sm" data-alt="Korea Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaBTv4yialqdvJ7Jm2wtY2021olb2Nsgo10U8uXUy3jL5Ch0WxdrAkeMtcNQ5XqTELPRZ_rIH5vLr0wASjHr51XwQbXKXnpNWLCgynMmuyNKGwganAbRhOugv2E5kXyr4N3SGyQ_CXuKIhTz3e5Ra7gMSpACnusbjkwrnWjamCJbrCFqra44fJOYkISOJ-WkTWbbwG8s3xt_sr2q8gGyQEm7HwjPu9sV0LWGm3hLkfW4eXxyiMRXIJ6AjJkoC0QHLBToiHKbu0ARo"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Skin1004</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Tinh Chất Rau Má Skin1004 Giảm Mụn &amp; Phục Hồi Da 100ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star_half</span>
+</div>
+<span class="text-[10px] text-gray-400">(2,1k)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-gray-400">325.000 ₫</span>
+<span class="text-xs text-gray-300 line-through">485.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-gray-100 text-gray-400 font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 text-sm cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+                                    Nhận thông báo
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">-15%</div>
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Cerave Cleanser bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEUo63WUZI2uD4cBq4dL05VvtcOTrhI4O9eOzpT_8vGcMXOu3_9JLpQCgZaxfUIenmAuvZHBxmDCRuZeqxF-3Mq14CV2EvbjGHn48oT1BkFFFzwc0GbUkn0YJI7sil7BuKHjI8EqTpFU13PBSWw08bcG_Ap9rHCiCCFBTH9q36Z7yoTlmfE4aBOk_hpvPKlHKBbUAAvQ6xkmVSov9bGLl_CiNQb_shTQXDQgZbPY8s6ktuSV46MZPOPxhrkqN1zNFnmc10rk7pqJ4"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="USA" class="w-4 h-auto shadow-sm" data-alt="USA Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3o7kwP96gm2M75xGthcDWcwMOa8nnIwsIRKqr7D2gA33Jl61dIUNcxgVJMHjJtYMuF-9CjvzPNwSGbpX02kZQxhQGZXRhFLJ33oXVHLtEz246qz_TAfTzpCCV53elT3Jq0Jfxaw1D_hyxFDPLnNoZPvFSPVXpgtMbbWtE2zQcwSAt7e12uQVmLLEunIO7Khdc6LithRvD9ph-5XIkUhK2flOPziuZLXzJCCLepNUv_3U8CeRTvlBp_LGAw2Ip5Wo86Jzyjri_WVk"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">CeraVe</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Sữa Rửa Mặt CeraVe Foaming Facial Cleanser Cho Da Dầu 473ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+</div>
+<span class="text-[10px] text-gray-400">(890)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">395.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">450.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    Thêm vào giỏ
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 7 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">-22%</div>
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 hue-rotate-90" data-alt="Generic Serum Bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQJ1CzYP8d03s78dqc-R-W-GwUzrhovW69iCRYt_afJxoSqLUwOV0kNXjiWJA7ks7yDwFcYSz47HEL2Yp0VgB517clAHxo8LReYuj5n0x7hZsm528x-4dNgkD0tvpG-LZFOlofIiVvaj--jZEeklLy7APBNOYiWN-uJN6abtNYhXYPPAOAR34aaAuGshADIsvTOF9-9YHNkhAzmDrTPagQwLpvoX7RD1NGAM4DO2DQ6SEtmlEuM-5kzpYSi0x-zLm9KQ737mgkJps"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="France" class="w-4 h-auto shadow-sm" data-alt="France Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXgkh0n0bfXIn0hfhUWZNZ2x0l5Igz9iC4sDEfL8fSGCmwWZrF7sJy_sQLuvTz3kZw-zZA_5J9yG9eGBhccSPOjA-Yp3COdYLPgylIIF2-gR-SDKTnvNL-J9FKdqqPzCmmu2kg26BdL5Eeo1wZ4wVjog05jZoViUX7L9i8K-mwSFH7-RUmQkthLZG6uRCUuSoTyqcysQCAGOLslR1AP6BCoqZaxB54L9V0IhZvm7d28NXJJQzJTUnSLFyPBvrSvopqnUAv_hfeNMU"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Bioderma</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                               Nước Tẩy Trang Bioderma Sensibio H2O Cho Da Nhạy Cảm 500ml
+                           </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] text-gray-300">star</span>
+</div>
+<span class="text-[10px] text-gray-400">(3.4k)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">420.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">535.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                   Thêm vào giỏ
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 8 -->
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
+<div class="absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 z-10 rounded-br-lg shadow-sm">-50%</div>
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 hue-rotate-180" data-alt="Sunscreen bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsYVOEIgfrMCPM2EHfMW6tma0-z5mG3BYJMYLGzcwvonm-IJd_xpMf3qmcEn5HjW9KqgjPLSZ2lz8FIslLvVTvmfMJ32sX8mm-5wY797AyzczmL8K_cFRiF0JUlpA5U_wevJBglYf5aV34-MDrHvgk41e0uke_DDg6UcjccJXQKrhHFe80Z-ksSF43bFXIowlNTJewhFTaCKwXX1iDzbZ9M3I3GS9lWXwHEkXSFct3NE-ntsotAvt3W58Ku6PjR5ZSbqEkPeppSfU"/>
+</div>
+<div class="p-4 flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-1">
+<img alt="France" class="w-4 h-auto shadow-sm" data-alt="France Flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRqFDyDW5JOsT3fE73RdRMxVmVbmrcDsV4zwJnEZMKu9WFmTssKjYail9boVOyZaCMoCse5V-_LPFgBckAFMnNDsAVFEtWuTdAa-NpTd2z4IvlFSvtBzNDBINtxDUV9yuJaEluevjITPWrGRqiavSu_-4BzGI4QuV3uLJ0zvY3Mitk_5wDu6WlnuzhrK4780R59_-Ond7Hwppn0S0cKbPyfZPPkdiFrQBZpQBoZcU7iKEsIDOFoVOyANLgbC5ylQht3kAQu_byNQQ"/>
+<span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">L'Oreal</span>
+</div>
+<h3 class="font-bold text-[#1b0d14] dark:text-gray-100 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5em]">
+                                Kem Chống Nắng L'Oreal Paris UV Defender Serum Invisible Fluid 50ml
+                            </h3>
+<div class="flex items-center gap-1 mt-1">
+<div class="flex text-yellow-400 text-[12px]">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+</div>
+<span class="text-[10px] text-gray-400">(678)</span>
+</div>
+<div class="mt-auto pt-2">
+<div class="flex flex-wrap items-baseline gap-2">
+<span class="text-lg font-bold text-primary">159.000 ₫</span>
+<span class="text-xs text-gray-400 line-through">318.000 ₫</span>
+</div>
+<button class="mt-3 w-full bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    Thêm vào giỏ
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-10">
+<nav class="flex gap-2">
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md shadow-pink-200" href="#">1</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 hover:text-primary hover:border-primary transition-colors" href="#">2</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 hover:text-primary hover:border-primary transition-colors" href="#">3</a>
+<span class="w-10 h-10 flex items-center justify-center text-gray-400">...</span>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 hover:text-primary hover:border-primary transition-colors" href="#">12</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-[#1a0b12] border-t border-[#f3e7ed] dark:border-gray-800 pt-10 pb-6 mt-12">
+<div class="container mx-auto px-4 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<h4 class="font-bold text-lg mb-4 text-[#1b0d14] dark:text-white">Hỗ trợ khách hàng</h4>
+<ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+<li><a class="hover:text-primary" href="#">Các câu hỏi thường gặp</a></li>
+<li><a class="hover:text-primary" href="#">Gửi yêu cầu hỗ trợ</a></li>
+<li><a class="hover:text-primary" href="#">Hướng dẫn đặt hàng</a></li>
+<li><a class="hover:text-primary" href="#">Phương thức vận chuyển</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4 text-[#1b0d14] dark:text-white">Về Hasaki Clone</h4>
+<ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+<li><a class="hover:text-primary" href="#">Giới thiệu</a></li>
+<li><a class="hover:text-primary" href="#">Tuyển dụng</a></li>
+<li><a class="hover:text-primary" href="#">Chính sách bảo mật</a></li>
+<li><a class="hover:text-primary" href="#">Điều khoản sử dụng</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4 text-[#1b0d14] dark:text-white">Thanh toán</h4>
+<div class="flex gap-2 text-gray-400">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4 text-[#1b0d14] dark:text-white">Kết nối với chúng tôi</h4>
+<div class="flex gap-3">
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">rss_feed</span>
+</a>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
+                © 2023 Hasaki Clone. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

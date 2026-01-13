@@ -1,0 +1,341 @@
+/*
+Theme Name: Nang Tho Cosmetics
+Theme URI: https://example.com/nang-tho-cosmetics
+Author: Antigravity
+Author URI: https://example.com
+Description: A custom WordPress theme converted from React for Nang Tho Cosmetics.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nang-tho-cosmetics
+*/
+
+/* Tailwind directives would go here if using Tailwind */
+
+/* Custom Checkout Columns */
+.woocommerce-billing-fields__field-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem;
+    /* Negative margin to offset padding */
+}
+
+.woocommerce-billing-fields__field-wrapper p.form-row {
+    padding: 0 0.5rem;
+    /* Horizontal padding for gutters */
+    margin-bottom: 1rem;
+    float: none !important;
+    /* Override WC float */
+}
+
+.nangtho-one-half {
+    width: 50%;
+}
+
+.nangtho-one-third {
+    width: 33.333333%;
+}
+
+/* Full width for wide fields - Higher specificity */
+.woocommerce-billing-fields__field-wrapper .form-row-wide,
+.woocommerce-billing-fields__field-wrapper p.form-row-wide {
+    width: 100% !important;
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Force new row for fields with clear class in flexbox */
+.woocommerce-billing-fields__field-wrapper .clear {
+    flex-basis: 100%;
+    width: 100%;
+}
+
+/* Ensure one-third fields don't exceed their width */
+.woocommerce-billing-fields__field-wrapper .nangtho-one-third {
+    max-width: 33.333333%;
+}
+
+/* Responsive adjustment for mobiles */
+@media (max-width: 768px) {
+
+    .nangtho-one-half,
+    .nangtho-one-third {
+        width: 100%;
+    }
+}
+
+/* Ensure Select2 container matches width if present */
+.select2-container {
+    width: 100% !important;
+}
+
+/* Hide default country field logic if not hidden by class */
+#billing_country_field {
+    display: none !important;
+}
+
+/* Additional styles can be added here or enqueued separately */
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Shop Page Styles */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ee2b8c;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #d91e6f;
+}
+
+/* Category Toggle Animation */
+.category-toggle {
+    transition: transform 0.2s ease;
+}
+
+.category-toggle.rotate-180 {
+    transform: rotate(180deg);
+}
+
+/* Product Card Hover Effects */
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+    margin-bottom: 0 !important;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Pagination Styles */
+.woocommerce nav.woocommerce-pagination {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.woocommerce nav.woocommerce-pagination ul {
+    display: inline-flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.woocommerce nav.woocommerce-pagination ul li {
+    margin: 0;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a:hover {
+    color: #ee2b8c;
+    border-color: #ee2b8c;
+}
+
+.woocommerce nav.woocommerce-pagination ul li span.current {
+    background: #ee2b8c;
+    color: white;
+    font-weight: bold;
+    border-color: #ee2b8c;
+}
+
+/* Dark mode pagination */
+.dark .woocommerce nav.woocommerce-pagination ul li a,
+.dark .woocommerce nav.woocommerce-pagination ul li span {
+    background: #1f2937;
+    border-color: #374151;
+    color: #9ca3af;
+}
+
+.dark .woocommerce nav.woocommerce-pagination ul li a:hover {
+    color: #ee2b8c;
+    border-color: #ee2b8c;
+}
+
+/* No Products Found */
+.woocommerce-info,
+.woocommerce-message {
+    padding: 1rem;
+    background: #f3e7ed;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Hide "Showing all X results" message */
+.woocommerce-result-count,
+p.woocommerce-result-count,
+.woocommerce .woocommerce-result-count,
+.woocommerce-before-shop-loop p,
+.woocommerce-before-shop-loop .woocommerce-result-count {
+    display: none !important;
+}
+
+/* Hide any paragraph that appears after product-grid-header and before product grid */
+.flex-1.min-w-0 > p:first-of-type:not(.text-gray-600):not(.text-gray-400),
+.flex-1.min-w-0 > p.woocommerce-result-count {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Breadcrumb Styles */
+.woocommerce-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.woocommerce-breadcrumb a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.woocommerce-breadcrumb a:hover {
+    color: #ee2b8c;
+}
+
+.woocommerce-breadcrumb .separator {
+    margin: 0 0.5rem;
+}
+
+/* Product Detail Page Styles */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.product-tab-panel {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.product-tab-panel.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Quantity input styling */
+.woocommerce .quantity input.qty {
+    border: none;
+    background: transparent;
+    width: 3rem;
+    text-align: center;
+    font-weight: 600;
+    padding: 0;
+}
+
+.woocommerce .quantity {
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.woocommerce .quantity button {
+    background: transparent;
+    border: none;
+    padding: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.woocommerce .quantity button:hover {
+    background-color: #f3f4f6;
+}
+
+/* Product tabs active state */
+.product-tabs-nav button.border-primary {
+    border-bottom-color: #ee2b8c !important;
+}
+
+/* Related products hover effect */
+.woocommerce .related.products .product:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+/* Review form styling */
+#review_form_wrapper,
+#respond {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.comment-form-rating label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.comment-form-rating select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+}
+
+/* Text color for product detail */
+.text-text-main {
+    color: #1b0d14;
+}
+
+.text-text-secondary {
+    color: #9a4c73;
+}
+
+.dark .text-text-main {
+    color: #ffffff;
+}
+
+.dark .text-text-secondary {
+    color: #c084a3;
+}

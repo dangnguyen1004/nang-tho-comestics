@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trang chủ mỹ phẩm</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b8c",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221019",
+                        "text-dark": "#1b0d14",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "sans": ["Manrope", "sans-serif"], // Ensure fallback
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Scrollbar for horizontal scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-dark dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full bg-white dark:bg-[#2a1b24] border-b border-[#f3e7ed] dark:border-white/10 shadow-sm">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20 gap-4">
+<!-- Logo -->
+<div class="flex items-center gap-2 shrink-0 cursor-pointer">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C14 4 5.5 11 4 20C5.5 31 14 38 24 38C34 38 42.5 31 44 20C42.5 11 34 4 24 4ZM24 33C16.8 33 11 27.2 11 20C11 12.8 16.8 7 24 7C31.2 7 37 12.8 37 20C37 27.2 31.2 33 24 33ZM24 13C20.1 13 17 16.1 17 20C17 23.9 20.1 27 24 27C27.9 27 31 23.9 31 20C31 16.1 27.9 13 24 13Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-xl md:text-2xl font-bold tracking-tight text-text-dark dark:text-white">Cosmetics<span class="text-primary">Store</span></h1>
+</div>
+<!-- Search Bar (Desktop) -->
+<div class="hidden md:flex flex-1 max-w-xl mx-8">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-transparent rounded-lg leading-5 bg-background-light dark:bg-white/5 text-text-dark dark:text-white placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-white/10 focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition duration-150 ease-in-out" placeholder="Tìm kiếm sản phẩm, thương hiệu..." type="text"/>
+<button class="absolute inset-y-0 right-0 px-4 py-1 m-1 rounded-md bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
+                                Tìm
+                            </button>
+</div>
+</div>
+<!-- Icons & User Actions -->
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-primary rounded-full">3</span>
+</button>
+<button class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-white/5 transition-colors text-sm font-bold text-text-dark dark:text-white">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Đăng nhập</span>
+</button>
+<button class="md:hidden p-2 text-gray-600 dark:text-gray-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+<!-- Navigation (Desktop) -->
+<nav class="hidden md:flex items-center gap-8 pb-3 text-sm font-medium text-text-dark dark:text-gray-200">
+<a class="hover:text-primary transition-colors border-b-2 border-primary" href="#">Trang chủ</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50" href="#">Chăm sóc da</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50" href="#">Trang điểm</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50" href="#">Cơ thể &amp; Tóc</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50" href="#">Thương hiệu</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50 text-primary font-bold" href="#">Khuyến mãi</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50" href="#">Blog</a>
+</nav>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Carousel -->
+<section class="w-full bg-white dark:bg-[#2a1b24] py-6">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-[400px]">
+<!-- Main Banner -->
+<div class="lg:col-span-2 relative w-full h-64 lg:h-full rounded-2xl overflow-hidden group shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Model with glowing skin holding a serum bottle against a pink gradient background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCO3ujvmBKtV54juslgCSNOxkMe29Sm4KBtkaSpyiRUlASTUUIbcohHwobSDIVohJBu8AmnPuTv3MSL6Gd1lm83bu9dOx481BRWVwR8XIxL19tOKL--2u4Pe3sj0Z0W-OkXPXMcGG6qWtKGBufWK-ZbodyltyAScGIQ_fLviIFsxwu6nSbwtfC2-P40sBtArCJVBC41KxrlOEUOi5mOjxOTbqlzUMkXgB_twPFRSfTjQ_IiJTmxboZkExGe6UK17rZ-9dY9xa02QwA');"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-8 lg:px-12">
+<span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-4">HOT DEAL</span>
+<h2 class="text-3xl lg:text-5xl font-bold text-white mb-2 leading-tight">Siêu Sale Hè <br/>Giảm tới 50%</h2>
+<p class="text-gray-200 text-lg mb-6 max-w-md">Săn deal mỹ phẩm chính hãng cực hot ngay hôm nay. Số lượng có hạn.</p>
+<button class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg w-fit transition-all flex items-center gap-2">
+                                    Mua Ngay <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Side Banners -->
+<div class="hidden lg:flex flex-col gap-6 h-full">
+<div class="flex-1 relative rounded-2xl overflow-hidden group shadow-md">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Collection of colorful lipsticks arranged artistically" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAeln3lkrATuPXejj-L3ac_EnmPotqxPRVjA19PuhU9i9W7_xDgeyHQ3p_AztYYF00FDHjs_eLM-alNxtlladV3FPBGBoES25VQCCHUDZpKh0xjGmagCaQPWgV66grp9Xe6Pri909519YzoDL7HborehhU6PdoQ1PixmfBn5mQbhsHartS4ESw0vEX5NVSFI1C-d5xeD6psfDdZ3aozR-qUicncxtAvTQi9IVs6bKCsDus1-INMtNbbg77gnegx0OXaD3D-_ZPZoIw');"></div>
+<div class="absolute inset-0 bg-black/30 hover:bg-black/20 transition-colors p-6 flex flex-col justify-end">
+<h3 class="text-white text-xl font-bold">Son Môi Cao Cấp</h3>
+<p class="text-gray-200 text-sm">Mua 1 tặng 1</p>
+</div>
+</div>
+<div class="flex-1 relative rounded-2xl overflow-hidden group shadow-md">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Sunscreen bottle on sand with seashells" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaeDlcXSmU1ecwoG6dew6woFJWgzWvBPdE-ouH-Q07FtH9p3ZYQKPnAPbyiMk1Ii2A7EI99cJRjqPysu6TiklqjDatEPt2ESHRdAqPlRZdU6Qb_d7KYReaPsRvw7J6TqkS46djwEJe_FYBAYLj4ZJMgvs323Ei6t8onBEurha_GD8nudrUdVtUFphOMPvZwfM9ouyX-sj9CkxmjKmk41x4HIf0gNWx3KvkbL1zC5X9JOdT38HU_cgVXnUml9wtHTKpv18FxwGapmE');"></div>
+<div class="absolute inset-0 bg-black/30 hover:bg-black/20 transition-colors p-6 flex flex-col justify-end">
+<h3 class="text-white text-xl font-bold">Chống Nắng Đỉnh Cao</h3>
+<p class="text-gray-200 text-sm">Bảo vệ da toàn diện</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section class="py-10 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold text-text-dark dark:text-white">Danh Mục Nổi Bật</h2>
+<a class="text-primary font-medium hover:underline text-sm" href="#">Xem tất cả</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+<!-- Category Item -->
+<a class="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/30 hover:shadow-lg transition-all group" href="#">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">face</span>
+</div>
+<h3 class="text-sm font-bold text-center group-hover:text-primary transition-colors">Chăm sóc da mặt</h3>
+</a>
+<a class="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/30 hover:shadow-lg transition-all group" href="#">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">brush</span>
+</div>
+<h3 class="text-sm font-bold text-center group-hover:text-primary transition-colors">Trang điểm</h3>
+</a>
+<a class="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/30 hover:shadow-lg transition-all group" href="#">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">spa</span>
+</div>
+<h3 class="text-sm font-bold text-center group-hover:text-primary transition-colors">Cơ thể</h3>
+</a>
+<a class="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/30 hover:shadow-lg transition-all group" href="#">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">content_cut</span>
+</div>
+<h3 class="text-sm font-bold text-center group-hover:text-primary transition-colors">Chăm sóc tóc</h3>
+</a>
+<a class="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/30 hover:shadow-lg transition-all group" href="#">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">health_and_safety</span>
+</div>
+<h3 class="text-sm font-bold text-center group-hover:text-primary transition-colors">Thực phẩm CN</h3>
+</a>
+<a class="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/30 hover:shadow-lg transition-all group" href="#">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">fragrance</span>
+</div>
+<h3 class="text-sm font-bold text-center group-hover:text-primary transition-colors">Nước hoa</h3>
+</a>
+</div>
+</section>
+<!-- Flash Sale -->
+<section class="bg-gradient-to-r from-pink-50 to-white dark:from-[#2a1b24] dark:to-background-dark py-10">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined animate-pulse">bolt</span>
+<h2 class="text-3xl font-black uppercase italic tracking-tighter">Deal Sốc Hôm Nay</h2>
+</div>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-sm font-medium text-gray-500 dark:text-gray-400">Kết thúc trong:</span>
+<div class="flex gap-1 text-white text-sm font-bold">
+<div class="bg-black dark:bg-primary rounded px-2 py-1">02</div>
+<div class="text-black dark:text-white py-1">:</div>
+<div class="bg-black dark:bg-primary rounded px-2 py-1">15</div>
+<div class="text-black dark:text-white py-1">:</div>
+<div class="bg-black dark:bg-primary rounded px-2 py-1">45</div>
+</div>
+</div>
+</div>
+<a class="text-primary font-bold hover:underline flex items-center gap-1" href="#">
+                            Xem tất cả deal <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Horizontal Scroll Products -->
+<div class="flex overflow-x-auto gap-4 pb-6 hide-scrollbar snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
+<!-- Flash Sale Item 1 -->
+<div class="min-w-[240px] md:min-w-[260px] snap-center bg-white dark:bg-[#2a1b24] rounded-lg border border-gray-100 dark:border-white/5 p-3 flex flex-col gap-3 group hover:shadow-xl transition-shadow relative">
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">-40%</div>
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="La Roche-Posay Anthelios sunscreen bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgws-B7ed4Ie5QOE9-oADRnEr1HXW83bF6Ixb_jvznbJPrM3O-NKSd8mKgC5pCWZm6MlYCkjx3tpMwwwdRDLKly5vr9FU0momdJUn8yNuvlWdwUBB7ouuzqQYvrXmDPz0752yeTVrjsox9XHeQC-8oWx5TRCqAANVTq7DC1NReGdFtn5q8wF_EXrVNknmb05DncaPVyxuHVtyuBmkasxrj34s12WRJYEpvw4q2RMSXMUr6Vj_Hz4csSZ82vcCyDMeSHNW47VwGWOQ');"></div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<h3 class="font-bold text-text-dark dark:text-white line-clamp-2 min-h-[48px]">La Roche-Posay Anthelios Invisible Fluid</h3>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="text-primary font-bold text-lg">350.000đ</span>
+<span class="text-gray-400 text-sm line-through decoration-1">580.000đ</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2 overflow-hidden">
+<div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400">Đã bán 75%</span>
+</div>
+</div>
+<!-- Flash Sale Item 2 -->
+<div class="min-w-[240px] md:min-w-[260px] snap-center bg-white dark:bg-[#2a1b24] rounded-lg border border-gray-100 dark:border-white/5 p-3 flex flex-col gap-3 group hover:shadow-xl transition-shadow relative">
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">-30%</div>
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Bottle of L'Oreal Paris Micellar Water" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDq3qZfi-m_oYaDSpgNvDqOHnFrHle--Bp83C2jpx7aPWKasi417pSdHCGck8zRuZ_gl7fOjw9zKNX9oKRV2RGv-vKZZizeNa9rjH5C3oSCo3PeKRxT-b9zNFAEqU-81Wa2dUc3x5cUuP28z-x6Z_DJwk3JHa_OXw0rtYP4V4NIVlL0NXo4cm8200ErRMyhyVS1dtEF-RkgCI9EVsCc61GA_D-IzJ8Wf7e3USlHAUCgDBGwWnyvg9780ZzY2HtjVn7NvtzWJUZ9PsI');"></div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<h3 class="font-bold text-text-dark dark:text-white line-clamp-2 min-h-[48px]">Nước Tẩy Trang L'Oreal Paris Micellar Water 400ml</h3>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="text-primary font-bold text-lg">159.000đ</span>
+<span class="text-gray-400 text-sm line-through decoration-1">219.000đ</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2 overflow-hidden">
+<div class="bg-primary h-2.5 rounded-full" style="width: 45%"></div>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400">Đã bán 45%</span>
+</div>
+</div>
+<!-- Flash Sale Item 3 -->
+<div class="min-w-[240px] md:min-w-[260px] snap-center bg-white dark:bg-[#2a1b24] rounded-lg border border-gray-100 dark:border-white/5 p-3 flex flex-col gap-3 group hover:shadow-xl transition-shadow relative">
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">-25%</div>
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Maybelline lipstick tube open" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANyYueK8-z20qbGNkINmf9nR-LN5oOqFi_RoRBrVp29_W1NI7sw9X9yng_ZSMVMHRynKTnVS58Jod8EBImgKmQM4uIVdtegNcWvR90WnW4ie71svbsoI1aTGXV4_9nz0Psd3O-nw96HEuR-cgW11DTnCw97zt5zwydCmBthxV-ENen9mYH-WftnZ9mdfQYND9r-MKwR83vbosD4ijDiaSB9DZibb9JExbJ1z_kSVsRczJgYcfxk4vi3_qnyTC5Da_ir8EPBS_sboA');"></div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<h3 class="font-bold text-text-dark dark:text-white line-clamp-2 min-h-[48px]">Son Kem Lì Maybelline Super Stay Matte Ink</h3>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="text-primary font-bold text-lg">175.000đ</span>
+<span class="text-gray-400 text-sm line-through decoration-1">235.000đ</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2 overflow-hidden">
+<div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400">Đã bán 90%</span>
+</div>
+</div>
+<!-- Flash Sale Item 4 -->
+<div class="min-w-[240px] md:min-w-[260px] snap-center bg-white dark:bg-[#2a1b24] rounded-lg border border-gray-100 dark:border-white/5 p-3 flex flex-col gap-3 group hover:shadow-xl transition-shadow relative">
+<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">-50%</div>
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Vichy Mineral 89 serum bottle on water background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFNmPK04Bcl2dr4_75RmYPyQeOc6OiWzVhRVm6VgtXNc4OOu699AMbJ2IEkX0M1O4Yu6PDOHYVvhfW_EuovuLlLYTQ0cWMw5bjSOsFmM6usu9lPNxuYBpglGtUoQVI17q3K33-7RT8I-iT0uKv4xex4LNZWTdqWP64h53SedNtb8Br18ThG9CirSUpTGxjLMYW1SAWVlzFmsTYfnlmv9fp1snr14HO6qWXnf6_Ku7_SBRsjuxmhBAvyjfcAYsU2Lo9SCyw48JwMLI');"></div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<h3 class="font-bold text-text-dark dark:text-white line-clamp-2 min-h-[48px]">Dưỡng Chất Khoáng Cô Đặc Vichy Mineral 89</h3>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="text-primary font-bold text-lg">550.000đ</span>
+<span class="text-gray-400 text-sm line-through decoration-1">1.100.000đ</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2 overflow-hidden">
+<div class="bg-primary h-2.5 rounded-full" style="width: 60%"></div>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400">Đã bán 60%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Best Sellers Grid -->
+<section class="py-12 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold text-text-dark dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-500">hotel_class</span>
+                        Top Bán Chạy
+                    </h2>
+<div class="flex gap-2">
+<button class="px-4 py-1 rounded-full text-sm font-medium bg-primary text-white">Chăm sóc da</button>
+<button class="px-4 py-1 rounded-full text-sm font-medium bg-white dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/20">Trang điểm</button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<!-- Product Card Reuse -->
+<div class="bg-white dark:bg-[#2a1b24] rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="Obagi retinol tube" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFM5ctPvpfdCwbkIzkc8a7pz0Qy4sH0XqCXOkGgZquk9ExiuRihVE8_1N4zxfbtPNZ-C7GKL4uuu1sFo9NM4I-Zwr553f6uTv_K0U3fzPhdGT_aomY3zju6-IIHaUuCF35bSu-eDKF8iFSX06Sz-NNuYfH186hwp7n5IS9MPKlCx_g4CPfZLQS_6u0skirZH_XTQzXO_F0FDTU-AcRoDD2m_9AJvyblfwkWSrsVoraRLSTlgKMsGEoSgltMyRobOuo-_9uJhKKSDQ');"></div>
+<button class="absolute bottom-2 right-2 size-8 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-yellow-400 text-xs">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="text-gray-500 dark:text-gray-400 font-medium ml-1">4.9 (230)</span>
+</div>
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Kem Dưỡng Obagi Clinical Retinol 0.5 Retexturizing</h3>
+<div class="mt-2 font-bold text-primary">1.350.000đ</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a1b24] rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="Simple face wash bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2xYt41P4Xl6IqCrgTDa8t9hF0jlyUJUTBHEG_nF-7ovDsvH8qPQnrg36J1wlDMzyFIGVugl2cHyjdbiA7jQrlRDSONiqho0PlE-cW-go0Z4w2q-LuFgaEgBX-NM7uC6Beacvu_KpdsXVkWGs7WjjlRodGIZhkCVeD1IZGu9BtFTtcgxBA0H7ZEb_Dla9--ZUtBnxE_xDHvJZVyQf25FSAiCS1M1vQmSdvbHtDd4VBef3kCF0z-5XEI8ndGVtmIxE2bmmzQxp59Sw');"></div>
+<button class="absolute bottom-2 right-2 size-8 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-yellow-400 text-xs">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="text-gray-500 dark:text-gray-400 font-medium ml-1">4.8 (500+)</span>
+</div>
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Sữa Rửa Mặt Simple Refreshing Facial Wash Gel</h3>
+<div class="mt-2 font-bold text-primary">115.000đ</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a1b24] rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="Cocoon coffee scrub jar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkPiDQHgmj3Vy_j1iVjsFnwVSovHG0klmOUXN1yEf1KXNIfT3uXAllWvPHw9Vv26Mg7po5QmLdkrYuxe9amb8dwCkx0anqN2JxC7TTfRFfPPW2NS8YYk2CLXDfncvKrd0KZnGKPpvodbgstFxfKMjn6YQrYlIAzNWGFqmIngh7fIAOx20jNNoEZ2fwGEE-iyYXSdlr1UbHVi-_zRTk0q1P9YOyY-80ZGN7s-J55fCeq12SOsdkdVtDJAPUccSGAMOmkq2HfVkX1TM');"></div>
+<button class="absolute bottom-2 right-2 size-8 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-yellow-400 text-xs">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="text-gray-500 dark:text-gray-400 font-medium ml-1">5.0 (150)</span>
+</div>
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Tẩy Da Chết Cơ Thể Cocoon Cà Phê Đắk Lắk</h3>
+<div class="mt-2 font-bold text-primary">95.000đ</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a1b24] rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="Klairs toner bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZhdSB2XoC1gZEhUzJRMwZQmNyhr-J7mlVIOkGf4k5CCN-8P0YLAd5JHMWy1bIBuwo8ud0lDMuUQU5h2ne_uka9gX_EQaVkDgqWf9DzmKnVcPcDhMQve0h_zvqXJE41cv1MbOihXEDcALwvg7TT0sPTg-Ko-vpjkjoMocoSEJV5mBNv7-JvABbDeNDHVibeutU1nd3y01C7KEiv64VfOOgquNfcPyX6pHYyFMf3caX5dO_bqeIuuwhNYvD7LzXnSuD_O5obNPqTZY');"></div>
+<button class="absolute bottom-2 right-2 size-8 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-yellow-400 text-xs">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="text-gray-500 dark:text-gray-400 font-medium ml-1">4.7 (320)</span>
+</div>
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Nước Hoa Hồng Klairs Supple Preparation Facial Toner</h3>
+<div class="mt-2 font-bold text-primary">280.000đ</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a1b24] rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="w-full aspect-square bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="MAC lipstick bullet" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChQqc239pFSMftbX3Z613LbJj3TnhsaAiIkFUwjn7UQgS9-TOXgcP-y1FFxuW4R73YlNML3oXtwd806qSmxA6oqGVUh5X2KDgwHRffNf1ojkTkcEtgx7VYznBJgtSZiJ63oXqRNKZ7x8AYTUBXpNcE81ggF04EmVevhk3RO9bhnoy2K2XkSQoAtmc5Ctcfj1Khjp_g7Czh2rSvy0OMnnQp9p_hj-BPAoBtK8g6hwdxFbv98J-wdLpIc15Fb7Mt24vwwjb2onPPFFM');"></div>
+<button class="absolute bottom-2 right-2 size-8 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-lg">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-yellow-400 text-xs">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="text-gray-500 dark:text-gray-400 font-medium ml-1">4.9 (800)</span>
+</div>
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Son MAC Retro Matte Lipstick - Ruby Woo</h3>
+<div class="mt-2 font-bold text-primary">550.000đ</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Arrivals Grid -->
+<section class="py-12 bg-white dark:bg-[#2a1b24]">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold text-text-dark dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">new_releases</span>
+                            Sản Phẩm Mới Về
+                        </h2>
+<a class="text-primary font-medium hover:underline text-sm" href="#">Xem tất cả</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<!-- Product Card 1 -->
+<div class="bg-background-light dark:bg-white/5 rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-full aspect-square bg-white dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
+<div class="w-full h-full bg-cover bg-center" data-alt="Laneige sleeping mask jar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDh_R6-2sdTjtnT5x1W48PUpqCIVAg63szfpwvW3Jmj4hrygzFC7trPAjjXCBTVVdB8mG7ebguwcdyDpHkORfOxJlOjHKJ5r9OB6n7TBDPXsuw6MazHyMOPSfoe_Wefdh3Sew67fIoDrIqrcvg-w24tZABP1yvde-gBZN5X9P-4h4rNnIy6TKZ1vYlLmQliR-YTFBAnNXqsojz_abnXsJ8dqlNGuDLJgmrJ7zXSn1HllqpYmUj4YFAp7x8zTJwoY6Xqx4pA0DqFU8w');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Mặt Nạ Ngủ Laneige Water Sleeping Mask EX 70ml</h3>
+<div class="mt-2 font-bold text-primary">650.000đ</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-background-light dark:bg-white/5 rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-full aspect-square bg-white dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
+<div class="w-full h-full bg-cover bg-center" data-alt="Estee Lauder advanced night repair bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtY-8SuxmInLMVc2KHw8vfRmzSuau-eUcnsV5y2HFnuBdfTwXxE_1C1ySoqqBaZnLN9LxRyzQv1yRkJFCwztTWtiM3OA8kB5dsczyMKlWpO426lC__O2Cs_ACAXdFGp0ws1C6egjMmtiTNjjIUnCyEvhnOQ_a17DSHEQLP74fBUwLFbRYPvdxWlOEYkiACWwHZ3vzDScfW16hvzbaAZTAdq01wr3E9LAgX6xwnUtV8dQF94RcxfcpbNx8zMM-ZP3u-tzVj1wpCaVA');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Tinh Chất Estée Lauder Advanced Night Repair</h3>
+<div class="mt-2 font-bold text-primary">2.100.000đ</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-background-light dark:bg-white/5 rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-full aspect-square bg-white dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
+<div class="w-full h-full bg-cover bg-center" data-alt="Innisfree green tea serum bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0cz9IsGn0SmfrMY6HtUoGIkLfkTh8UvLs1UPi0r2FxmN7fZ1awWMdbT2HYz9bMBvIBo0EU4loJtooaJJj5ccAlvIZZMhSjS3uAZNxDwv47ze3HfloyGkJMjidwA0FtdBhWSJ22FYwcme-nl61r8DOy4f1vjCBwKbOS-hfsYUnGHPHNOp5jpG36QtHp7j-aqbMvthINDf2zYJbuo7gRjDQV7co69loEh6Ibz_3ZKx3YVAak9vElTxt4S7GP1wufN8iXCVIHoTdBcc');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Tinh Chất Innisfree Green Tea Seed Serum</h3>
+<div class="mt-2 font-bold text-primary">450.000đ</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-background-light dark:bg-white/5 rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-full aspect-square bg-white dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
+<div class="w-full h-full bg-cover bg-center" data-alt="Paula's Choice BHA bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPYAIwYh_IcAQ6k6rNOjo7il9fFWyuRKujiiZFWFNmry1uZtTilsjQqDVIkWF42wlf5vtW9AmRJtUkeqx9oMVN4LrJ5NB2fh6UFTboonXY1GSytGPSiPiMvAdwcT3w9JC29zDUhQ07YIuX6lu6Lq_ayo8rNVWUkF4tov2exSa5Xllq4xUie2yY2elyXsVjb8grp3MbqPB8ODdG5Zr_Oclvs2cMuZfRXhTOBolBL_8041RnHR72ylPSu4fWREzKfHI5JzS124tE0fQ');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Dung Dịch Paula’s Choice Skin Perfecting 2% BHA</h3>
+<div class="mt-2 font-bold text-primary">850.000đ</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="bg-background-light dark:bg-white/5 rounded-lg p-3 flex flex-col gap-3 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-full aspect-square bg-white dark:bg-white/5 rounded-lg overflow-hidden relative">
+<div class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
+<div class="w-full h-full bg-cover bg-center" data-alt="Kiehl's calendula toner bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2gGIwhzqltxB42JVA2HQkOZmnHXOe0d8QO-bLlz0VsE-9lRc1axz9GOsNG-zxYDKo-Ma_7lL0e4yCw5tzPN-5q8_w-5e5ntht5pkUXJ4C_HUvnFgqy1ddQDhzsSR7jgIBWhSVwjTHpx9aDtYg2UoJUoIp8bw2Gd1CsKbavueXALQ5YjKf0n0EyKjcffZTcSvADHtQ0W8rusZidefL5u1gyA2mUteyRoJPwO36jy0WiWDktNxPKqN97p-sNQVjXFvdDMkD_4Vp1_I');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-sm font-semibold text-text-dark dark:text-white line-clamp-2 min-h-[40px] group-hover:text-primary transition-colors">Toner Hoa Cúc Kiehl's Calendula Herbal Extract</h3>
+<div class="mt-2 font-bold text-primary">950.000đ</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Brands Section -->
+<section class="py-10 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-200 dark:border-white/10">
+<h3 class="text-center text-lg font-bold text-gray-500 mb-6 uppercase tracking-wider">Thương hiệu đồng hành</h3>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="text-2xl font-black text-gray-400">L'ORÉAL</div>
+<div class="text-2xl font-black text-gray-400">VICHY</div>
+<div class="text-2xl font-black text-gray-400">LA ROCHE-POSAY</div>
+<div class="text-2xl font-black text-gray-400">MAYBELLINE</div>
+<div class="text-2xl font-black text-gray-400">INNISFREE</div>
+<div class="text-2xl font-black text-gray-400">LANEIGE</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-[#1a0f14] border-t border-[#f3e7ed] dark:border-white/10 pt-16 pb-8">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<!-- Column 1 -->
+<div>
+<div class="flex items-center gap-2 mb-4">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C14 4 5.5 11 4 20C5.5 31 14 38 24 38C34 38 42.5 31 44 20C42.5 11 34 4 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-xl font-bold text-text-dark dark:text-white">Cosmetics<span class="text-primary">Store</span></span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                            Địa chỉ tin cậy cho mọi tín đồ làm đẹp. Cam kết 100% hàng chính hãng, đổi trả dễ dàng và giao hàng nhanh chóng trên toàn quốc.
+                        </p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">mail</span>
+</a>
+</div>
+</div>
+<!-- Column 2 -->
+<div>
+<h4 class="font-bold text-text-dark dark:text-white mb-4">Hỗ trợ khách hàng</h4>
+<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Hướng dẫn mua hàng</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Chính sách đổi trả</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Phương thức thanh toán</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Chính sách bảo mật</a></li>
+</ul>
+</div>
+<!-- Column 3 -->
+<div>
+<h4 class="font-bold text-text-dark dark:text-white mb-4">Về chúng tôi</h4>
+<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Giới thiệu</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Tuyển dụng</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Liên hệ</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Hệ thống cửa hàng</a></li>
+</ul>
+</div>
+<!-- Column 4 -->
+<div>
+<h4 class="font-bold text-text-dark dark:text-white mb-4">Đăng ký nhận tin</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Nhận thông tin khuyến mãi mới nhất</p>
+<form class="flex gap-2">
+<input class="flex-1 px-3 py-2 rounded-lg bg-background-light dark:bg-white/5 border border-transparent focus:outline-none focus:ring-1 focus:ring-primary text-sm" placeholder="Email của bạn" type="email"/>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors" type="button">Gửi</button>
+</form>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-gray-400">© 2023 Cosmetics Store. All rights reserved.</p>
+<div class="flex gap-4">
+<span class="text-2xl text-gray-300 font-bold italic">VISA</span>
+<span class="text-2xl text-gray-300 font-bold italic">MasterCard</span>
+<span class="text-2xl text-gray-300 font-bold italic">Momo</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
