@@ -1,0 +1,99 @@
+version: '3.8'
+
+# Production Docker Compose với Nginx và SSL
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: nangtho_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-strongpassword123}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-nangtho_cosmetics}
+      MYSQL_USER: ${MYSQL_USER:-nangtho_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-strongpassword123}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - nangtho_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wordpress:
+    image: wordpress:php8.2-apache
+    container_name: nangtho_wp
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER:-nangtho_user}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-strongpassword123}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE:-nangtho_cosmetics}
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-false}
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/nang-tho-cosmetics:/var/www/html/wp-content/themes/nang-tho-cosmetics
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - nangtho_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wordpress.rule=Host(`${DOMAIN:-localhost}`)"
+      - "traefik.http.routers.wordpress.entrypoints=websecure"
+      - "traefik.http.routers.wordpress.tls.certresolver=letsencrypt"
+
+  # Traefik reverse proxy với auto SSL
+  traefik:
+    image: traefik:v2.10
+    container_name: nangtho_traefik
+    restart: always
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=${SSL_EMAIL:-admin@example.com}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - letsencrypt_data:/letsencrypt
+    networks:
+      - nangtho_network
+
+  # Redis cache (optional, for better performance)
+  redis:
+    image: redis:7-alpine
+    container_name: nangtho_redis
+    restart: always
+    volumes:
+      - redis_data:/data
+    networks:
+      - nangtho_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
+  wp_data:
+  letsencrypt_data:
+  redis_data:
+
+networks:
+  nangtho_network:
+    driver: bridge

@@ -22,3 +22,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Docker volumes (if local)
+db_data/
+wp_data/
+
+# WordPress uploads (if local)
+wp-content/uploads/
+
+# Backup files
+*.backup
+*.bak
