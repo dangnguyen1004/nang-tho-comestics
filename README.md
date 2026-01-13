@@ -1,73 +1,131 @@
-# React + TypeScript + Vite
+# Nàng Thơ Cosmetics - WordPress Theme
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Theme WordPress/WooCommerce cho website bán mỹ phẩm Nàng Thơ Cosmetics.
 
-Currently, two official plugins are available:
+## 🚀 Cài đặt & Triển khai
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Yêu cầu hệ thống
 
-## React Compiler
+- Docker & Docker Compose
+- Git
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Cách deploy với Docker
 
-## Expanding the ESLint configuration
+1. **Clone repository**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <repository-url>
+cd workspace
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Khởi động Docker containers**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+docker-compose up -d
 ```
+
+3. **Truy cập các services**
+
+| Service | URL | Mô tả |
+|---------|-----|-------|
+| WordPress | http://localhost:8080 | Website chính |
+| phpMyAdmin | http://localhost:8081 | Quản lý database |
+
+4. **Cài đặt WordPress**
+
+- Truy cập http://localhost:8080
+- Hoàn thành wizard cài đặt WordPress
+- Chọn theme `nang-tho-cosmetics` trong Appearance > Themes
+- Cài đặt và kích hoạt plugin WooCommerce
+
+### Cấu hình Database
+
+| Thông số | Giá trị |
+|----------|---------|
+| Host | db |
+| Database | nangtho_cosmetics |
+| User | user |
+| Password | password |
+
+## 📁 Cấu trúc Project
+
+```
+├── docker-compose.yml          # Docker configuration
+├── wp-content/
+│   └── themes/
+│       └── nang-tho-cosmetics/ # Theme chính
+│           ├── assets/         # CSS, JS files
+│           ├── includes/       # PHP classes
+│           ├── template-parts/ # Template components
+│           ├── woocommerce/    # WooCommerce templates
+│           ├── functions.php   # Theme functions
+│           ├── style.css       # Theme stylesheet
+│           └── ...
+└── _reference/                 # Design references
+```
+
+## 🎨 Theme Features
+
+- **Homepage**: Hero banner, Flash sale, Best sellers, Categories, Brands
+- **Shop page**: Product grid với filters, sidebar
+- **Product detail**: Image gallery, product info, reviews, related products
+- **Cart & Checkout**: Vietnamese payment gateway integration
+- **Responsive design**: Mobile-first approach
+
+## 🛠️ Development
+
+### Dừng containers
+
+```bash
+docker-compose down
+```
+
+### Xem logs
+
+```bash
+docker-compose logs -f wordpress
+```
+
+### Rebuild containers
+
+```bash
+docker-compose up -d --build
+```
+
+### Xóa tất cả data (reset)
+
+```bash
+docker-compose down -v
+```
+
+## 📝 Notes
+
+- Theme tự động mount vào WordPress container
+- Thay đổi code trong `wp-content/themes/nang-tho-cosmetics/` sẽ reflect ngay lập tức
+- Database data được persist trong Docker volume `db_data`
+
+## 🔗 External Deployment
+
+### Deploy lên hosting
+
+1. Export database từ phpMyAdmin
+2. Upload theme folder lên hosting
+3. Import database và update `wp_options` table với domain mới
+4. Activate theme và configure settings
+
+### Deploy lên VPS với Docker
+
+```bash
+# SSH vào VPS
+ssh user@your-vps-ip
+
+# Clone và deploy
+git clone <repository-url>
+cd workspace
+docker-compose up -d
+```
+
+---
+
+**Author**: Antigravity  
+**License**: ISC
