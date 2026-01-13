@@ -1,0 +1,159 @@
+name: Deploy WordPress Theme
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'wp-content/themes/nang-tho-cosmetics/**'
+  workflow_dispatch:
+
+env:
+  THEME_NAME: nang-tho-cosmetics
+
+jobs:
+  # Job 1: Validate theme files
+  validate:
+    name: Validate Theme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, cs2pr
+
+      - name: Check PHP syntax
+        run: |
+          find wp-content/themes/${{ env.THEME_NAME }} -name "*.php" -exec php -l {} \;
+
+      - name: Validate style.css
+        run: |
+          if [ ! -f "wp-content/themes/${{ env.THEME_NAME }}/style.css" ]; then
+            echo "❌ style.css not found!"
+            exit 1
+          fi
+          echo "✅ style.css exists"
+
+      - name: Validate functions.php
+        run: |
+          if [ ! -f "wp-content/themes/${{ env.THEME_NAME }}/functions.php" ]; then
+            echo "❌ functions.php not found!"
+            exit 1
+          fi
+          echo "✅ functions.php exists"
+
+  # Job 2: Build and package theme
+  build:
+    name: Build Theme Package
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create theme package
+        run: |
+          cd wp-content/themes
+          zip -r ${{ env.THEME_NAME }}.zip ${{ env.THEME_NAME }} \
+            -x "*.git*" \
+            -x "*.DS_Store" \
+            -x "*.md"
+
+      - name: Upload theme artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: theme-package
+          path: wp-content/themes/${{ env.THEME_NAME }}.zip
+          retention-days: 30
+
+  # Job 3: Deploy to server (SSH)
+  deploy-ssh:
+    name: Deploy via SSH
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download theme artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: theme-package
+          path: ./
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            # Navigate to WordPress themes directory
+            cd ${{ secrets.WP_PATH }}/wp-content/themes/
+            
+            # Backup existing theme
+            if [ -d "${{ env.THEME_NAME }}" ]; then
+              mv ${{ env.THEME_NAME }} ${{ env.THEME_NAME }}_backup_$(date +%Y%m%d_%H%M%S)
+            fi
+            
+            # Pull latest changes
+            cd ${{ secrets.WP_PATH }}
+            git pull origin main
+            
+            # Set correct permissions
+            chown -R www-data:www-data wp-content/themes/${{ env.THEME_NAME }}
+            chmod -R 755 wp-content/themes/${{ env.THEME_NAME }}
+            
+            # Clear cache if WP-CLI available
+            if command -v wp &> /dev/null; then
+              wp cache flush --path=${{ secrets.WP_PATH }}
+            fi
+            
+            echo "✅ Deployment completed!"
+
+  # Job 4: Deploy to Railway (alternative)
+  deploy-railway:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway up --detach
+          echo "✅ Deployed to Railway!"
+
+  # Job 5: Notify on completion
+  notify:
+    name: Send Notification
+    runs-on: ubuntu-latest
+    needs: [deploy-ssh]
+    if: always()
+    steps:
+      - name: Send success notification
+        if: needs.deploy-ssh.result == 'success'
+        run: |
+          echo "🎉 Deployment successful!"
+          # Add Slack/Discord/Telegram notification here if needed
+
+      - name: Send failure notification
+        if: needs.deploy-ssh.result == 'failure'
+        run: |
+          echo "❌ Deployment failed!"
+          # Add notification here
