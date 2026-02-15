@@ -257,6 +257,7 @@ function nang_tho_include_payment_gateway()
 {
     if (class_exists('WC_Payment_Gateway')) {
         require_once get_template_directory() . '/includes/class-wc-gateway-vietnam-bank-transfer.php';
+        require_once get_template_directory() . '/includes/class-wc-gateway-sepay.php';
     }
 }
 add_action('plugins_loaded', 'nang_tho_include_payment_gateway');
@@ -490,6 +491,7 @@ add_action('wp_enqueue_scripts', 'nang_tho_cosmetics_scripts');
 function nang_tho_add_payment_gateway($gateways)
 {
     $gateways[] = 'WC_Gateway_Vietnam_Bank_Transfer';
+    $gateways[] = 'WC_Gateway_SePay';
     return $gateways;
 }
 add_filter('woocommerce_payment_gateways', 'nang_tho_add_payment_gateway');
@@ -500,6 +502,38 @@ add_filter('woocommerce_payment_gateways', 'nang_tho_add_payment_gateway');
 add_filter('gettext', 'nang_tho_translate_woocommerce_strings', 999, 3);
 function nang_tho_translate_woocommerce_strings($translated, $text, $domain)
 {
+    // Translate "Search results for" regardless of domain
+    if (strpos($text, 'Search results for') !== false) {
+        $translated = str_replace('Search results for', 'Kết quả tìm kiếm cho', $translated);
+    }
+    
+    // Translate comment form strings regardless of domain
+    $comment_strings = array(
+        'Leave a Reply' => 'Để lại bình luận',
+        'Logged in as' => 'Đăng nhập với tên',
+        'Edit your profile' => 'Chỉnh sửa hồ sơ',
+        'Log out?' => 'Đăng xuất?',
+        'Log out' => 'Đăng xuất',
+        'Required fields are marked *' => 'Các trường bắt buộc được đánh dấu *',
+        'Required fields are marked' => 'Các trường bắt buộc được đánh dấu',
+    );
+    
+    if (isset($comment_strings[$text])) {
+        $translated = $comment_strings[$text];
+    }
+    
+    // Handle combined strings with placeholders
+    if (strpos($text, 'Logged in as') !== false && strpos($text, 'Edit your profile') !== false) {
+        // Pattern: "Logged in as %1$s. %2$s" where %2$s contains "Edit your profile. Log out?"
+        $translated = preg_replace('/Logged in as (.+?)\. (.+?)\. Log out\?/', 'Đăng nhập với tên $1. $2. Đăng xuất?', $text);
+        if ($translated === $text) {
+            // Fallback if regex doesn't match
+            $translated = str_replace('Logged in as', 'Đăng nhập với tên', $text);
+            $translated = str_replace('Edit your profile', 'Chỉnh sửa hồ sơ', $translated);
+            $translated = str_replace('Log out?', 'Đăng xuất?', $translated);
+        }
+    }
+    
     if ($domain === 'woocommerce') {
         switch ($text) {
             case 'Billing details':
@@ -559,10 +593,80 @@ function nang_tho_translate_woocommerce_strings($translated, $text, $domain)
             case 'Payment method:':
                 $translated = 'Phương thức thanh toán:';
                 break;
+            case 'Search results for':
+                $translated = 'Kết quả tìm kiếm cho';
+                break;
+            case 'Search results for:':
+                $translated = 'Kết quả tìm kiếm cho:';
+                break;
+            case 'Username or email address':
+                $translated = 'Tên đăng nhập hoặc email';
+                break;
+            case 'Password':
+                $translated = 'Mật khẩu';
+                break;
+            case 'Remember me':
+                $translated = 'Ghi nhớ đăng nhập';
+                break;
+            case 'Log in':
+                $translated = 'Đăng nhập';
+                break;
+            case 'Lost your password?':
+                $translated = 'Quên mật khẩu?';
+                break;
+            case 'Required':
+                $translated = 'Bắt buộc';
+                break;
             // Add more translations as needed
         }
     }
+    
+    // Translate login form strings regardless of domain
+    $login_strings = array(
+        'Username or email address' => 'Tên đăng nhập hoặc email',
+        'Password' => 'Mật khẩu',
+        'Remember me' => 'Ghi nhớ đăng nhập',
+        'Log in' => 'Đăng nhập',
+        'Lost your password?' => 'Quên mật khẩu?',
+        'Required' => 'Bắt buộc',
+    );
+    
+    if (isset($login_strings[$text])) {
+        $translated = $login_strings[$text];
+    }
+    
     return $translated;
+}
+
+/**
+ * Customize comment form text
+ */
+add_filter('comment_form_defaults', 'nang_tho_custom_comment_form_text');
+function nang_tho_custom_comment_form_text($defaults)
+{
+    $user = wp_get_current_user();
+    if ($user->exists()) {
+        $user_identity = $user->display_name ? $user->display_name : $user->user_login;
+        $logout_url = wp_logout_url(apply_filters('the_permalink', get_permalink()));
+        $profile_url = get_edit_user_link($user->ID);
+        
+        // Compact logged in message - just show user info with links
+        $defaults['logged_in_as'] = sprintf(
+            '<p class="logged-in-info text-sm text-gray-600 dark:text-gray-400 mb-4">Đăng nhập với tên <a href="%1$s" class="text-primary hover:underline font-medium">%2$s</a> • <a href="%3$s" class="text-primary hover:underline">Chỉnh sửa</a> • <a href="%4$s" class="text-primary hover:underline">Đăng xuất</a></p>',
+            esc_url($profile_url),
+            esc_html($user_identity),
+            esc_url($profile_url),
+            esc_url($logout_url)
+        );
+    }
+    
+    $defaults['title_reply'] = 'Để lại bình luận';
+    $defaults['title_reply_to'] = 'Trả lời %s';
+    $defaults['cancel_reply_link'] = 'Hủy trả lời';
+    $defaults['label_submit'] = 'Gửi bình luận';
+    $defaults['comment_notes_before'] = '';
+    $defaults['comment_notes_after'] = '<p class="text-xs text-gray-500 dark:text-gray-400 mt-3">Các trường bắt buộc được đánh dấu *</p>';
+    return $defaults;
 }
 
 /**

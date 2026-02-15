@@ -153,16 +153,56 @@ $total_ratings = array_sum($rating_distribution);
 
 <?php
 // Show comment form for reviews
-if (comments_open() && is_user_logged_in()):
-    comment_form(array(
-        'comment_field' => '<div class="comment-form-rating"><label for="rating">Đánh giá của bạn</label><select name="rating" id="rating" required>
-            <option value="">Chọn đánh giá</option>
-            <option value="5">5 sao</option>
-            <option value="4">4 sao</option>
-            <option value="3">3 sao</option>
-            <option value="2">2 sao</option>
-            <option value="1">1 sao</option>
-        </select></div>',
-    ), $product->get_id());
+if (comments_open()):
+    if (is_user_logged_in()):
+        comment_form(array(
+            'comment_field' => '<div class="comment-form-rating mb-4"><label for="rating" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Đánh giá của bạn <span class="text-red-500">*</span></label><select name="rating" id="rating" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                <option value="">Chọn đánh giá</option>
+                <option value="5">5 sao</option>
+                <option value="4">4 sao</option>
+                <option value="3">3 sao</option>
+                <option value="2">2 sao</option>
+                <option value="1">1 sao</option>
+            </select></div>
+            <div class="comment-form-comment mb-4">
+                <label for="comment" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Bình luận của bạn <span class="text-red-500">*</span></label>
+                <textarea id="comment" name="comment" cols="45" rows="8" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none" placeholder="Viết bình luận của bạn..."></textarea>
+            </div>',
+            'fields' => array(),
+            'submit_button' => '<button type="submit" id="submit" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors">Gửi bình luận</button>',
+        ), $product->get_id());
+    else:
+        // Show login prompt for non-logged-in users
+        $login_url = get_permalink(get_option('woocommerce_myaccount_page_id'));
+        $current_url = get_permalink();
+        $login_url_with_redirect = add_query_arg('redirect_to', urlencode($current_url), $login_url);
+        ?>
+        <div class="bg-white dark:bg-[#2c1621] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 md:p-8 mt-6">
+            <div class="flex flex-col items-center text-center">
+                <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-primary text-3xl">lock</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Đăng nhập để đánh giá</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 max-w-md">
+                    Vui lòng đăng nhập để có thể đánh giá và bình luận về sản phẩm này.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="<?php echo esc_url($login_url_with_redirect); ?>" 
+                       class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">login</span>
+                        Đăng nhập
+                    </a>
+                    <?php if (get_option('users_can_register')): ?>
+                        <a href="<?php echo esc_url(add_query_arg('redirect_to', urlencode($current_url), $login_url . '#register')); ?>" 
+                           class="border border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary/5 transition-colors inline-flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">person_add</span>
+                            Đăng ký
+                        </a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <?php
+    endif;
 endif;
 ?>

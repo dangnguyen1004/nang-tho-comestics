@@ -1,0 +1,17 @@
+{
+  "name": "nang-tho-cosmetics/sepay-integration",
+  "description": "SePay Payment Gateway integration for Nang Tho Cosmetics WooCommerce",
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=7.4",
+    "sepay/sepay-pg": "^1.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NangTho\\": "wp-content/themes/nang-tho-cosmetics/includes/"
+    }
+  },
+  "config": {
+    "vendor-dir": "vendor"
+  }
+}

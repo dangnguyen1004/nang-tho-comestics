@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# Nang Tho Cosmetics - WordPress Theme
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About This Project
 
-Currently, two official plugins are available:
+This is a vibe-coding project primarily focused on learning how to use AI and agents to build a complete project without prior knowledge of PHP or WordPress. The project demonstrates the power of AI-assisted development, where multiple AI tools work together to create a functional WordPress/WooCommerce theme.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**AI Tools Used:**
+- **Cursor** - AI-powered code editor for development
+- **Claude CLI** - Command-line AI assistant
+- **Gemini CLI** - Google's AI assistant via CLI
+- **Antigravity** - AI development assistant
+- **Google Stitch** - UI generation from designs
 
-## React Compiler
+This project serves as a proof-of-concept that with the right AI tools and agents, you can build complex applications even without deep knowledge of the underlying technologies.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+A custom WordPress/WooCommerce theme for a cosmetics e-commerce website, optimized for the Vietnamese market with local payment methods and user-friendly interface.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Homepage**: Hero carousel, product categories, new arrivals, best sellers, flash sale sections
+- **Shop Page**: Product grid with sidebar filters (category, price, brand, stock status), search, and sorting
+- **Product Detail**: Large product images, detailed information, reviews, related products
+- **Cart**: Product list with quantity controls and order summary
+- **Checkout**: Customer information form, shipping options, payment methods (COD, bank transfer, e-wallets)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Requirements
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- WordPress 5.0+
+- WooCommerce 5.0+
+- PHP 7.4+ (PHP 8.0+ recommended)
+- MySQL 5.7+ or MariaDB 10.3+
+
+## Installation
+
+### Manual Installation
+
+1. Copy the `wp-content/themes/nang-tho-cosmetics` folder to your WordPress `wp-content/themes/` directory
+2. Activate the theme in WordPress Admin → Appearance → Themes
+3. Install and activate WooCommerce plugin
+4. Run WooCommerce Setup Wizard
+
+### Docker Development
+
+```bash
+# Start containers
+docker-compose up -d
+
+# Access WordPress
+# http://localhost:8080
+
+# Access phpMyAdmin
+# http://localhost:8081
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+wp-content/themes/nang-tho-cosmetics/
+├── assets/
+│   ├── css/          # Stylesheets
+│   └── js/           # JavaScript files
+├── includes/         # Custom classes (payment gateway)
+├── template-parts/   # Reusable template parts
+│   ├── home/        # Homepage sections
+│   └── shop/        # Shop page components
+├── woocommerce/      # WooCommerce template overrides
+├── functions.php     # Theme functions and hooks
+├── style.css        # Main stylesheet
+└── ...
+```
+
+## Customization
+
+- **Colors**: Edit `style.css` or use WordPress Customizer
+- **Templates**: Modify files in `woocommerce/` directory
+- **Template Parts**: Add new parts in `template-parts/` and call with `get_template_part()`
+
+## Development
+
+### Docker Services
+
+- **WordPress**: Port 8080
+- **MySQL**: Database
+- **phpMyAdmin**: Port 8081
+
+### Best Practices
+
+- Follow WordPress and WooCommerce coding standards
+- Use hooks (actions/filters) instead of modifying core files
+- Use `wp_enqueue_script()` and `wp_enqueue_style()` for assets
+- Validate and sanitize all user input
+- Use nonces for form submissions
+
+## Author
+
+**Antigravity**
+
+## License
+
+GNU General Public License v2 or later
+
+---
+
+**Version**: 1.0.1

@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# PHP dependencies (installed on server via composer)
+vendor/
+
+# Environment secrets
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
