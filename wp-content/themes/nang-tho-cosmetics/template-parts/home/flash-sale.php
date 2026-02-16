@@ -33,7 +33,7 @@ if ( ! empty( $include_ids ) ) {
                 'price'         => wc_price($sale_price),
                 'originalPrice' => wc_price($regular_price),
                 'discount'      => '-' . $discount . '%',
-                'sold'          => (int) $product->get_meta('total_sales'),
+                'sold'          => (int) $product->get_total_sales(),
                 'image'         => wp_get_attachment_image_url($product->get_image_id(), 'large'),
                 'link'          => get_permalink($product->get_id()),
             ];
