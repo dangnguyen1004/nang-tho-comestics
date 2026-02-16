@@ -8,9 +8,9 @@
 defined('ABSPATH') || exit;
 
 $current_category = get_queried_object();
-$min_price = isset($_GET['min_price']) ? floatval($_GET['min_price']) : '';
-$max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : '';
-$selected_brands = isset($_GET['filter_brand']) ? (array) $_GET['filter_brand'] : array();
+$min_price = isset($_GET['min_price']) ? abs(floatval($_GET['min_price'])) : '';
+$max_price = isset($_GET['max_price']) ? abs(floatval($_GET['max_price'])) : '';
+$selected_brands = isset($_GET['filter_brand']) ? array_map('sanitize_title', (array) $_GET['filter_brand']) : array();
 $stock_status = isset($_GET['stock_status']) ? sanitize_text_field($_GET['stock_status']) : '';
 ?>
 

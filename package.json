@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "WordPress Theme for Nang Tho Cosmetics",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:css": "npx tailwindcss -i wp-content/themes/nang-tho-cosmetics/assets/css/tailwind-input.css -o wp-content/themes/nang-tho-cosmetics/assets/css/tailwind.css --minify",
+    "watch:css": "npx tailwindcss -i wp-content/themes/nang-tho-cosmetics/assets/css/tailwind-input.css -o wp-content/themes/nang-tho-cosmetics/assets/css/tailwind.css --watch"
   },
   "keywords": [
     "wordpress",
     "theme"
   ],
   "author": "Antigravity",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
 }

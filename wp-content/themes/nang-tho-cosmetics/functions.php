@@ -700,25 +700,27 @@ function nang_tho_custom_product_query($q)
 
     // Price filter
     if (isset($_GET['min_price']) && $_GET['min_price']) {
+        $min_price = abs(floatval($_GET['min_price']));
         $meta_query[] = array(
             'key' => '_price',
-            'value' => floatval($_GET['min_price']),
+            'value' => $min_price,
             'compare' => '>=',
             'type' => 'NUMERIC',
         );
     }
 
     if (isset($_GET['max_price']) && $_GET['max_price']) {
+        $max_price = abs(floatval($_GET['max_price']));
         $meta_query[] = array(
             'key' => '_price',
-            'value' => floatval($_GET['max_price']),
+            'value' => $max_price,
             'compare' => '<=',
             'type' => 'NUMERIC',
         );
     }
 
     // Stock filter
-    if (isset($_GET['stock_status']) && $_GET['stock_status'] === 'instock') {
+    if (isset($_GET['stock_status']) && sanitize_text_field($_GET['stock_status']) === 'instock') {
         $meta_query[] = array(
             'key' => '_stock_status',
             'value' => 'instock',
@@ -732,7 +734,7 @@ function nang_tho_custom_product_query($q)
 
     // Brand filter
     if (isset($_GET['filter_brand']) && !empty($_GET['filter_brand'])) {
-        $brands = (array) $_GET['filter_brand'];
+        $brands = array_map('sanitize_title', (array) $_GET['filter_brand']);
         
         // Try product attribute first (pa_thuong-hieu)
         $brand_taxonomy = 'pa_thuong-hieu';

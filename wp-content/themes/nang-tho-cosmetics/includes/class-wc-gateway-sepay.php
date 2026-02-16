@@ -224,7 +224,7 @@ class WC_Gateway_SePay extends WC_Payment_Gateway
                         'order_id' => $order_id,
                         'status' => 'success'
                     ),
-                    home_url('/')
+                    home_url('/', is_ssl() ? 'https' : 'http')
                 ))
                 ->errorUrl(add_query_arg(
                     array(
@@ -232,7 +232,7 @@ class WC_Gateway_SePay extends WC_Payment_Gateway
                         'order_id' => $order_id,
                         'status' => 'error'
                     ),
-                    home_url('/')
+                    home_url('/', is_ssl() ? 'https' : 'http')
                 ))
                 ->cancelUrl(add_query_arg(
                     array(
@@ -240,7 +240,7 @@ class WC_Gateway_SePay extends WC_Payment_Gateway
                         'order_id' => $order_id,
                         'status' => 'cancel'
                     ),
-                    home_url('/')
+                    home_url('/', is_ssl() ? 'https' : 'http')
                 ))
                 ->build();
 

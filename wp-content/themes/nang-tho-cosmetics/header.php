@@ -10,26 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-    <!-- Tailwind CSS (Dev Mode) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#ee2b8c",
-                        "background-light": "#f8f6f7",
-                        "background-dark": "#221019",
-                        "text-dark": "#1b0d14",
-                    },
-                    fontFamily: {
-                        "sans": ["Manrope", "sans-serif"],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/tailwind.css">
     <?php wp_head(); ?>
 </head>
 
