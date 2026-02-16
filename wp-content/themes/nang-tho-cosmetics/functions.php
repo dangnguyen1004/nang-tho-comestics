@@ -446,41 +446,44 @@ function nang_tho_cosmetics_scripts()
 
     wp_localize_script('nang-tho-vietnam-checkout', 'nang_tho_data', $vietnam_data);
 
-    // Enqueue Payment Gateway CSS
-    if (is_checkout() || is_order_received_page()) {
-        wp_enqueue_style('nang-tho-payment-gateway', get_template_directory_uri() . '/assets/css/payment-gateway.css', array(), _S_VERSION);
-    }
-
-    // Enqueue Shop Filters JavaScript
-    if (is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy()) {
-        wp_enqueue_script('nang-tho-shop-filters', get_template_directory_uri() . '/assets/js/shop-filters.js', array('jquery'), _S_VERSION, true);
-        
-        // Localize script with shop URL
-        wp_localize_script('nang-tho-shop-filters', 'wc_shop_params', array(
-            'shop_url' => wc_get_page_permalink('shop'),
-        ));
-    }
-
-    // Enqueue Product Detail JavaScript
-    if (is_product()) {
-        wp_enqueue_script('nang-tho-product-detail', get_template_directory_uri() . '/assets/js/product-detail.js', array('jquery'), _S_VERSION, true);
-        
-        // Get WooCommerce AJAX endpoint
-        $ajax_url = '';
-        if (class_exists('WC_AJAX')) {
-            $ajax_url = WC_AJAX::get_endpoint('add_to_cart');
-        } else {
-            $ajax_url = home_url('/?wc-ajax=add_to_cart');
+    // WooCommerce-specific scripts (only load when WooCommerce is active)
+    if (class_exists('WooCommerce')) {
+        // Enqueue Payment Gateway CSS
+        if (is_checkout() || is_order_received_page()) {
+            wp_enqueue_style('nang-tho-payment-gateway', get_template_directory_uri() . '/assets/css/payment-gateway.css', array(), _S_VERSION);
         }
-        
-        // Localize script with WooCommerce params
-        wp_localize_script('nang-tho-product-detail', 'wc_add_to_cart_params', array(
-            'ajax_url' => $ajax_url,
-            'wc_ajax_url' => home_url('/?wc-ajax=%%endpoint%%'),
-            'checkout_url' => esc_url_raw(wc_get_checkout_url()),
-            'cart_url' => esc_url_raw(wc_get_cart_url()),
-            'i18n_view_cart' => esc_attr__('View cart', 'woocommerce'),
-        ));
+
+        // Enqueue Shop Filters JavaScript
+        if (is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy()) {
+            wp_enqueue_script('nang-tho-shop-filters', get_template_directory_uri() . '/assets/js/shop-filters.js', array('jquery'), _S_VERSION, true);
+
+            // Localize script with shop URL
+            wp_localize_script('nang-tho-shop-filters', 'wc_shop_params', array(
+                'shop_url' => wc_get_page_permalink('shop'),
+            ));
+        }
+
+        // Enqueue Product Detail JavaScript
+        if (is_product()) {
+            wp_enqueue_script('nang-tho-product-detail', get_template_directory_uri() . '/assets/js/product-detail.js', array('jquery'), _S_VERSION, true);
+
+            // Get WooCommerce AJAX endpoint
+            $ajax_url = '';
+            if (class_exists('WC_AJAX')) {
+                $ajax_url = WC_AJAX::get_endpoint('add_to_cart');
+            } else {
+                $ajax_url = home_url('/?wc-ajax=add_to_cart');
+            }
+
+            // Localize script with WooCommerce params
+            wp_localize_script('nang-tho-product-detail', 'wc_add_to_cart_params', array(
+                'ajax_url' => $ajax_url,
+                'wc_ajax_url' => home_url('/?wc-ajax=%%endpoint%%'),
+                'checkout_url' => esc_url_raw(wc_get_checkout_url()),
+                'cart_url' => esc_url_raw(wc_get_cart_url()),
+                'i18n_view_cart' => esc_attr__('View cart', 'woocommerce'),
+            ));
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'nang_tho_cosmetics_scripts');
