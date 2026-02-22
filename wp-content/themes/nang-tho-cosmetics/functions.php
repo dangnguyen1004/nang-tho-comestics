@@ -257,7 +257,6 @@ function nang_tho_include_payment_gateway()
 {
     if (class_exists('WC_Payment_Gateway')) {
         require_once get_template_directory() . '/includes/class-wc-gateway-vietnam-bank-transfer.php';
-        require_once get_template_directory() . '/includes/class-wc-gateway-sepay.php';
     }
 }
 add_action('plugins_loaded', 'nang_tho_include_payment_gateway');
@@ -494,7 +493,6 @@ add_action('wp_enqueue_scripts', 'nang_tho_cosmetics_scripts');
 function nang_tho_add_payment_gateway($gateways)
 {
     $gateways[] = 'WC_Gateway_Vietnam_Bank_Transfer';
-    $gateways[] = 'WC_Gateway_SePay';
     return $gateways;
 }
 add_filter('woocommerce_payment_gateways', 'nang_tho_add_payment_gateway');
