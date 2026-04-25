@@ -3,6 +3,7 @@
  * Single Product Additional Information Tab (Thành phần)
  *
  * @package Nang_Tho_Cosmetics
+ * @version 3.0.0
  */
 
 defined('ABSPATH') || exit;

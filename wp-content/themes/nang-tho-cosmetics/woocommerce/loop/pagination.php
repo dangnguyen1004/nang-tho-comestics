@@ -3,6 +3,7 @@
  * Pagination for product loops
  *
  * @package Nang_Tho_Cosmetics
+ * @version 9.3.0
  */
 
 defined('ABSPATH') || exit;

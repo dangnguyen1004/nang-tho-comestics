@@ -3,6 +3,7 @@
  * Product loop start
  *
  * @package Nang_Tho_Cosmetics
+ * @version 3.3.0
  */
 
 defined('ABSPATH') || exit;

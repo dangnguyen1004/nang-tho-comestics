@@ -3,6 +3,7 @@
  * Single Product Tabs
  *
  * @package Nang_Tho_Cosmetics
+ * @version 9.8.0
  */
 
 defined('ABSPATH') || exit;

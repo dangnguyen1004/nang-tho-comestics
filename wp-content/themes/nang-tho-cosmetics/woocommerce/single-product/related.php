@@ -3,6 +3,7 @@
  * Single Product Related Products
  *
  * @package Nang_Tho_Cosmetics
+ * @version 10.3.0
  */
 
 defined('ABSPATH') || exit;

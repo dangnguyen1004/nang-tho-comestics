@@ -3,6 +3,7 @@
  * The Template for displaying product archives, including the main shop page
  *
  * @package Nang_Tho_Cosmetics
+ * @version 8.6.0
  */
 
 defined('ABSPATH') || exit;

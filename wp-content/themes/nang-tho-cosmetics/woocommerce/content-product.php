@@ -3,6 +3,7 @@
  * The template for displaying product content within loops
  *
  * @package Nang_Tho_Cosmetics
+ * @version 9.4.0
  */
 
 defined('ABSPATH') || exit;

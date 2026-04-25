@@ -3,6 +3,7 @@
  * The Template for displaying all single products
  *
  * @package Nang_Tho_Cosmetics
+ * @version 1.6.4
  */
 
 defined('ABSPATH') || exit;
