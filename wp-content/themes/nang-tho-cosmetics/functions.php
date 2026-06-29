@@ -891,3 +891,44 @@ function nang_tho_product_usage_tab()
         echo '</div>';
     }
 }
+
+/**
+ * Việt hoá các chuỗi WooCommerce còn sót tiếng Anh
+ */
+add_filter('gettext', 'nang_tho_viet_hoa_woocommerce', 20, 3);
+function nang_tho_viet_hoa_woocommerce($translated, $text, $domain) {
+    $strings = [
+        'Free shipping'          => 'Miễn phí vận chuyển',
+        'Coupon:'                => 'Mã giảm giá:',
+        'Apply coupon'           => 'Áp dụng mã',
+        'Remove'                 => 'Xóa',
+        'Cart'                   => 'Giỏ hàng',
+        'Checkout'               => 'Thanh toán',
+        'Order total:'           => 'Tổng đơn hàng:',
+        'Subtotal:'              => 'Tạm tính:',
+        'Shipping:'              => 'Vận chuyển:',
+        'Payment method:'        => 'Phương thức thanh toán:',
+        'Place order'            => 'Đặt hàng',
+        'Your order'             => 'Đơn hàng của bạn',
+        'Product'                => 'Sản phẩm',
+        'Total'                  => 'Tổng',
+        'Continue shopping'      => 'Tiếp tục mua hàng',
+        'Return to shop'         => 'Quay lại cửa hàng',
+        'No products in the cart.' => 'Chưa có sản phẩm trong giỏ hàng.',
+        'Update cart'            => 'Cập nhật giỏ hàng',
+        'Proceed to checkout'    => 'Tiến hành thanh toán',
+    ];
+    if (isset($strings[$text])) {
+        return $strings[$text];
+    }
+    return $translated;
+}
+
+/**
+ * Việt hoá breadcrumb WooCommerce
+ */
+add_filter('woocommerce_breadcrumb_defaults', 'nang_tho_breadcrumb_viet');
+function nang_tho_breadcrumb_viet($args) {
+    $args['home'] = 'Trang chủ';
+    return $args;
+}

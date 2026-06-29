@@ -60,7 +60,7 @@
 
         <div
             class="border-t border-gray-100 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-sm text-gray-400">© 2023 Nàng Thơ Cosmetics. All rights reserved.</p>
+            <p class="text-sm text-gray-400">© 2025 Nàng Thơ Cosmetics. Bảo lưu mọi quyền.</p>
             <div class="flex gap-4">
                 <span class="text-2xl text-gray-300 font-bold italic">VISA</span>
                 <span class="text-2xl text-gray-300 font-bold italic">MasterCard</span>

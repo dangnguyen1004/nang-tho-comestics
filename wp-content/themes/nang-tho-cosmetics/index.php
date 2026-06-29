@@ -32,8 +32,8 @@ get_header();
         else :
             ?>
             <div class="no-results">
-                <h2 class="text-2xl font-bold"><?php esc_html_e( 'Nothing Found', 'nang-tho-cosmetics' ); ?></h2>
-                <p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for.', 'nang-tho-cosmetics' ); ?></p>
+                <h2 class="text-2xl font-bold">Không tìm thấy nội dung</h2>
+                <p>Xin lỗi, chúng tôi không tìm thấy trang bạn cần. Hãy thử tìm kiếm hoặc quay lại trang chủ.</p>
             </div>
             <?php
         endif;
