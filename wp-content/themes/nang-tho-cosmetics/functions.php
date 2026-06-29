@@ -445,6 +445,15 @@ function nang_tho_cosmetics_scripts()
 
     wp_localize_script('nang-tho-vietnam-checkout', 'nang_tho_data', $vietnam_data);
 
+    // Enqueue Flash Sale Countdown JavaScript
+    wp_enqueue_script(
+        'nang-tho-flash-sale-countdown',
+        get_template_directory_uri() . '/assets/js/flash-sale-countdown.js',
+        array(),
+        _S_VERSION,
+        true
+    );
+
     // WooCommerce-specific scripts (only load when WooCommerce is active)
     if (class_exists('WooCommerce')) {
         // Enqueue Payment Gateway CSS

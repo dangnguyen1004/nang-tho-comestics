@@ -52,11 +52,11 @@ if ( ! empty( $include_ids ) ) {
                 <div class="flex items-center gap-3 mt-1">
                     <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Kết thúc trong:</span>
                     <div class="flex gap-1 text-white text-sm font-bold">
-                        <div class="bg-black dark:bg-primary rounded px-2 py-1">02</div>
+                        <div class="bg-black dark:bg-primary rounded px-2 py-1" id="flash-sale-hours">00</div>
                         <div class="text-black dark:text-white py-1">:</div>
-                        <div class="bg-black dark:bg-primary rounded px-2 py-1">15</div>
+                        <div class="bg-black dark:bg-primary rounded px-2 py-1" id="flash-sale-minutes">00</div>
                         <div class="text-black dark:text-white py-1">:</div>
-                        <div class="bg-black dark:bg-primary rounded px-2 py-1">45</div>
+                        <div class="bg-black dark:bg-primary rounded px-2 py-1" id="flash-sale-seconds">00</div>
                     </div>
                 </div>
             </div>
