@@ -29,7 +29,8 @@ $categories = [];
 
 if (!is_wp_error($product_categories) && is_array($product_categories)) {
     foreach ($product_categories as $cat) {
-        if ($cat->name === 'Uncategorized' || $cat->slug === 'uncategorized')
+        if (in_array($cat->slug, ['uncategorized', 'chua-phan-loai']) ||
+            in_array($cat->name, ['Uncategorized', 'Chưa phân loại']))
             continue;
 
         $categories[] = [
