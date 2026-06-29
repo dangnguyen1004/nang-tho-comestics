@@ -98,13 +98,13 @@
                     <nav class="hidden md:flex items-center gap-8 pb-3 text-sm font-medium text-text-dark dark:text-gray-200">
                         <a href="<?php echo esc_url(home_url('/')); ?>"
                             class="hover:text-primary transition-colors border-b-2 border-primary">Trang chủ</a>
-                        <a href="<?php echo esc_url(home_url('/shop')); ?>"
+                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>"
                             class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Chăm
                             sóc da</a>
-                        <a href="<?php echo esc_url(home_url('/shop')); ?>?cat=makeup"
+                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=makeup"
                             class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Trang
                             điểm</a>
-                        <a href="<?php echo esc_url(home_url('/shop')); ?>?cat=body"
+                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=body"
                             class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Cơ
                             thể & Tóc</a>
                         <a href="<?php echo esc_url(home_url('/brands')); ?>"
@@ -145,11 +145,11 @@
                         <nav class="py-4 flex flex-col space-y-2">
                             <a href="<?php echo esc_url(home_url('/')); ?>"
                                 class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Trang chủ</a>
-                            <a href="<?php echo esc_url(home_url('/shop')); ?>"
+                            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>"
                                 class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Chăm sóc da</a>
-                            <a href="<?php echo esc_url(home_url('/shop')); ?>?cat=makeup"
+                            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=makeup"
                                 class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Trang điểm</a>
-                            <a href="<?php echo esc_url(home_url('/shop')); ?>?cat=body"
+                            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=body"
                                 class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Cơ thể & Tóc</a>
                             <a href="<?php echo esc_url(home_url('/brands')); ?>"
                                 class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Thương hiệu</a>
