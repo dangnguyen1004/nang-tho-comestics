@@ -47,7 +47,7 @@ $stock_status = isset($_GET['stock_status']) ? sanitize_text_field($_GET['stock_
 
             if (!is_wp_error($product_categories) && !empty($product_categories)):
                 foreach ($product_categories as $category) {
-                $is_active = $current_category && $current_category->term_id === $category->term_id;
+                $is_active = ($current_category instanceof WP_Term) && $current_category->term_id === $category->term_id;
                 $subcategories = get_terms(array(
                     'taxonomy' => 'product_cat',
                     'hide_empty' => true,
@@ -72,7 +72,7 @@ $stock_status = isset($_GET['stock_status']) ? sanitize_text_field($_GET['stock_
                             <?php foreach ($subcategories as $subcat): ?>
                                 <?php
                                 $subcat_url = get_term_link($subcat);
-                                $is_sub_active = $current_category && $current_category->term_id === $subcat->term_id;
+                                $is_sub_active = ($current_category instanceof WP_Term) && $current_category->term_id === $subcat->term_id;
                                 ?>
                                 <li>
                                     <a class="text-sm py-1 block <?php echo $is_sub_active ? 'text-primary font-medium' : 'text-gray-600 dark:text-gray-300 hover:text-primary'; ?>" 
