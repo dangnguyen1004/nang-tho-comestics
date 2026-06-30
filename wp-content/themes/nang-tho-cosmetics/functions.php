@@ -832,9 +832,11 @@ function nang_tho_live_search_handler()
     $categories = [];
     if (!is_wp_error($raw_cats) && !empty($raw_cats)) {
         foreach ($raw_cats as $cat) {
+            $link = get_term_link($cat, 'product_cat');
+            if (is_wp_error($link)) continue;
             $categories[] = [
                 'name'  => $cat->name,
-                'url'   => get_term_link($cat),
+                'url'   => $link,
                 'count' => (int) $cat->count,
             ];
         }

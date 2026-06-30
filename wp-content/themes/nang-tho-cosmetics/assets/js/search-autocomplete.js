@@ -6,6 +6,7 @@
     var debounceTimer = null;
     var dropdown = null;
     var activeIndex = -1;
+    var lastQuery = '';
     var wrapper = input.closest('.relative');
 
     // ── Dropdown lifecycle ────────────────────────────────────────────
@@ -111,9 +112,11 @@
         fd.append('nonce',  nangThoSearch.nonce);
         fd.append('query',  query);
 
+        lastQuery = query;
         fetch(nangThoSearch.ajaxUrl, { method: 'POST', body: fd })
             .then(function (r) { return r.json(); })
             .then(function (data) {
+                if (input.value.trim() !== lastQuery) return; // stale response, discard
                 if (data.success) render(data.data);
                 else hideDropdown();
             })
