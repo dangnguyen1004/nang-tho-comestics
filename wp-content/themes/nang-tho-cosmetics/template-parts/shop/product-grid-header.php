@@ -39,7 +39,10 @@ if (isset($_GET['stock_status']) && $_GET['stock_status'] === 'instock') {
         <div>
             <h2 class="text-2xl font-bold text-[#1b0d14] dark:text-white">
                 <?php
-                if ($current_category && is_a($current_category, 'WP_Term')) {
+                if (is_search()) {
+                    $search_query = esc_html(get_search_query());
+                    echo 'Kết quả tìm kiếm cho <span class="text-primary">"' . $search_query . '"</span>';
+                } elseif ($current_category && is_a($current_category, 'WP_Term')) {
                     echo esc_html($current_category->name);
                 } else {
                     echo 'Sản phẩm';
