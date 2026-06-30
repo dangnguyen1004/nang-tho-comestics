@@ -101,21 +101,24 @@
                     <?php
                 } else {
                     // Fallback nav with dynamic product category links
+                    $nav_active   = 'hover:text-primary transition-colors border-b-2 border-primary';
+                    $nav_inactive = 'hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50';
                     ?>
                     <nav class="hidden md:flex items-center gap-8 pb-3 text-sm font-medium text-text-dark dark:text-gray-200">
                         <a href="<?php echo esc_url(home_url('/')); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-primary">Trang chủ</a>
+                            class="<?php echo is_front_page() ? $nav_active : $nav_inactive; ?>">Trang chủ</a>
                         <?php foreach ($nav_cats as [$slug, $label]):
                             $term = get_term_by('slug', $slug, 'product_cat');
                             if ($term && !is_wp_error($term)):
-                                $url = get_term_link($term, 'product_cat'); ?>
+                                $url = get_term_link($term, 'product_cat');
+                                $cls = is_product_category($slug) ? $nav_active : $nav_inactive; ?>
                         <a href="<?php echo esc_url($url); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50"><?php echo esc_html($label); ?></a>
+                            class="<?php echo $cls; ?>"><?php echo esc_html($label); ?></a>
                         <?php endif; endforeach; ?>
                         <a href="<?php echo esc_url(home_url('/sale')); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50 text-primary font-bold">Khuyến mãi</a>
+                            class="<?php echo (is_page('sale') ? $nav_active : $nav_inactive); ?> text-primary font-bold">Khuyến mãi</a>
                         <a href="<?php echo esc_url(home_url('/blog')); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Blog</a>
+                            class="<?php echo (is_home() || is_singular('post')) ? $nav_active : $nav_inactive; ?>">Blog</a>
                     </nav>
                     <?php
                 }
@@ -142,21 +145,24 @@
                         <?php
                     } else {
                         // Fallback nav with dynamic product category links
+                        $mob_active   = 'px-4 py-2 text-sm font-medium text-primary font-bold bg-background-light dark:bg-white/5 transition-colors';
+                        $mob_inactive = 'px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors';
                         ?>
                         <nav class="py-4 flex flex-col space-y-2">
                             <a href="<?php echo esc_url(home_url('/')); ?>"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Trang chủ</a>
+                                class="<?php echo is_front_page() ? $mob_active : $mob_inactive; ?>">Trang chủ</a>
                             <?php foreach ($nav_cats as [$slug, $label]):
                                 $term = get_term_by('slug', $slug, 'product_cat');
                                 if ($term && !is_wp_error($term)):
-                                    $url = get_term_link($term, 'product_cat'); ?>
+                                    $url = get_term_link($term, 'product_cat');
+                                    $cls = is_product_category($slug) ? $mob_active : $mob_inactive; ?>
                             <a href="<?php echo esc_url($url); ?>"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors"><?php echo esc_html($label); ?></a>
+                                class="<?php echo $cls; ?>"><?php echo esc_html($label); ?></a>
                             <?php endif; endforeach; ?>
                             <a href="<?php echo esc_url(home_url('/sale')); ?>"
-                                class="px-4 py-2 text-sm font-medium text-primary font-bold hover:bg-background-light dark:hover:bg-white/5 transition-colors">Khuyến mãi</a>
+                                class="<?php echo is_page('sale') ? $mob_active : 'px-4 py-2 text-sm font-medium text-primary font-bold hover:bg-background-light dark:hover:bg-white/5 transition-colors'; ?>">Khuyến mãi</a>
                             <a href="<?php echo esc_url(home_url('/blog')); ?>"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Blog</a>
+                                class="<?php echo (is_home() || is_singular('post')) ? $mob_active : $mob_inactive; ?>">Blog</a>
                         </nav>
                         <?php
                     }
