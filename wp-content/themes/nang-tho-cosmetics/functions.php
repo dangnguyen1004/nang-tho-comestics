@@ -801,9 +801,10 @@ remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wra
 remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
 /**
- * Remove "Showing all X results" message on shop page
+ * Remove "Showing all X results" message and duplicate sort dropdown on shop page
  */
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 
 /**
  * Filter to return empty string for result count

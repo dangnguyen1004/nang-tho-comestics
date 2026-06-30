@@ -107,10 +107,48 @@ body {
     transform: rotate(180deg);
 }
 
-/* Product Card Hover Effects */
+/* Product Grid — CSS Grid for equal-height cards */
+.woocommerce ul.products,
+.woocommerce-page ul.products {
+    display: grid !important;
+    gap: 1rem !important;
+    float: none !important;
+    clear: both;
+    margin: 0 !important;
+}
+.woocommerce ul.products.columns-4,
+.woocommerce-page ul.products.columns-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+}
+.woocommerce ul.products.columns-3,
+.woocommerce-page ul.products.columns-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+}
+@media (max-width: 1024px) {
+    .woocommerce ul.products.columns-4,
+    .woocommerce-page ul.products.columns-4 {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+@media (max-width: 640px) {
+    .woocommerce ul.products.columns-4,
+    .woocommerce ul.products.columns-3,
+    .woocommerce-page ul.products.columns-4,
+    .woocommerce-page ul.products.columns-3 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
 .woocommerce ul.products li.product,
 .woocommerce-page ul.products li.product {
-    margin-bottom: 0 !important;
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+}
+
+/* Prevent add-to-cart button text wrapping */
+.woocommerce ul.products li.product .button,
+.woocommerce-page ul.products li.product .button {
+    white-space: nowrap;
 }
 
 /* Line clamp utility */
@@ -121,60 +159,65 @@ body {
     overflow: hidden;
 }
 
-/* Pagination Styles */
-.woocommerce nav.woocommerce-pagination {
-    text-align: center;
-    margin-top: 2.5rem;
-}
-
-.woocommerce nav.woocommerce-pagination ul {
-    display: inline-flex;
+/* Pagination Styles — targets custom pagination.php template */
+nav[aria-label="Product pagination"] ul.page-numbers {
+    display: flex !important;
+    flex-wrap: wrap;
     gap: 0.5rem;
     list-style: none;
     padding: 0;
     margin: 0;
+    align-items: center;
 }
 
-.woocommerce nav.woocommerce-pagination ul li {
+nav[aria-label="Product pagination"] ul.page-numbers li {
     margin: 0;
 }
 
-.woocommerce nav.woocommerce-pagination ul li a,
-.woocommerce nav.woocommerce-pagination ul li span {
+nav[aria-label="Product pagination"] ul.page-numbers li a,
+nav[aria-label="Product pagination"] ul.page-numbers li span {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
+    min-width: 2.5rem;
     height: 2.5rem;
+    padding: 0 0.5rem;
     border-radius: 0.5rem;
     border: 1px solid #e5e7eb;
     background: white;
     color: #6b7280;
     text-decoration: none;
     transition: all 0.2s;
+    font-size: 0.875rem;
 }
 
-.woocommerce nav.woocommerce-pagination ul li a:hover {
+nav[aria-label="Product pagination"] ul.page-numbers li a:hover {
     color: #ee2b8c;
     border-color: #ee2b8c;
 }
 
-.woocommerce nav.woocommerce-pagination ul li span.current {
+nav[aria-label="Product pagination"] ul.page-numbers li span.current {
     background: #ee2b8c;
     color: white;
     font-weight: bold;
     border-color: #ee2b8c;
 }
 
+nav[aria-label="Product pagination"] ul.page-numbers li span.dots {
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+}
+
 /* Dark mode pagination */
-.dark .woocommerce nav.woocommerce-pagination ul li a,
-.dark .woocommerce nav.woocommerce-pagination ul li span {
+.dark nav[aria-label="Product pagination"] ul.page-numbers li a,
+.dark nav[aria-label="Product pagination"] ul.page-numbers li span {
     background: #1f2937;
     border-color: #374151;
     color: #9ca3af;
 }
 
-.dark .woocommerce nav.woocommerce-pagination ul li a:hover {
+.dark nav[aria-label="Product pagination"] ul.page-numbers li a:hover {
     color: #ee2b8c;
     border-color: #ee2b8c;
 }

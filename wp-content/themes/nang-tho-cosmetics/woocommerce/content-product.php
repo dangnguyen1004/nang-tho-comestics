@@ -15,7 +15,7 @@ if (!wc_get_loop_prop('is_paginated', true) && wc_get_loop_prop('is_shortcode'))
 }
 ?>
 
-<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative">
+<div class="group bg-white dark:bg-[#2c1621] rounded-lg border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col overflow-hidden relative h-full">
     <div class="relative aspect-[4/5] bg-white p-4 overflow-hidden">
         <?php
         // Discount badge
@@ -110,16 +110,18 @@ if (!wc_get_loop_prop('is_paginated', true) && wc_get_loop_prop('is_shortcode'))
         ?>
 
         <div class="mt-auto pt-2">
-            <div class="flex flex-wrap items-baseline gap-2">
-                <?php
-                // Price
-                if ($product->is_on_sale()) {
-                    echo '<span class="text-lg font-bold text-primary">' . $product->get_price_html() . '</span>';
-                    echo '<span class="text-xs text-gray-400 line-through">' . wc_price($product->get_regular_price()) . '</span>';
-                } else {
-                    echo '<span class="text-lg font-bold text-primary">' . $product->get_price_html() . '</span>';
-                }
-                ?>
+            <div class="min-h-[3.5rem] flex flex-col justify-end pb-1">
+                <div class="flex flex-wrap items-baseline gap-1">
+                    <?php
+                    // Price
+                    if ($product->is_on_sale()) {
+                        echo '<span class="text-lg font-bold text-primary leading-tight">' . $product->get_price_html() . '</span>';
+                        echo '<span class="text-xs text-gray-400 line-through">' . wc_price($product->get_regular_price()) . '</span>';
+                    } else {
+                        echo '<span class="text-lg font-bold text-primary leading-tight">' . $product->get_price_html() . '</span>';
+                    }
+                    ?>
+                </div>
             </div>
 
             <?php if ($product->is_in_stock()): ?>
