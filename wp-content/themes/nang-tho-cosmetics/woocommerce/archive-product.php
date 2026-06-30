@@ -44,14 +44,18 @@ get_header();
                 woocommerce_product_loop_end();
                 do_action('woocommerce_after_shop_loop');
             } else {
-                ?>
-                <div class="bg-white dark:bg-[#2c1621] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 text-center">
-                    <p class="text-gray-600 dark:text-gray-400">Không tìm thấy sản phẩm nào.</p>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors">
-                        Xem tất cả sản phẩm
-                    </a>
-                </div>
-                <?php
+                if (is_search()) {
+                    get_template_part('template-parts/search/search-empty-state');
+                } else {
+                    ?>
+                    <div class="bg-white dark:bg-[#2c1621] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 text-center">
+                        <p class="text-gray-600 dark:text-gray-400">Không tìm thấy sản phẩm nào.</p>
+                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors">
+                            Xem tất cả sản phẩm
+                        </a>
+                    </div>
+                    <?php
+                }
             }
             ?>
         </div>
