@@ -76,6 +76,13 @@
 
                 <!-- Navigation (Desktop) -->
                 <?php
+                $nav_cats = [
+                    ['cham-soc-da',  'Chăm sóc da'],
+                    ['trang-diem',   'Trang điểm'],
+                    ['co-the-toc',   'Cơ thể & Tóc'],
+                    ['nuoc-hoa',     'Nước hoa'],
+                    ['thuc-pham-cn', 'Thực phẩm chức năng'],
+                ];
                 if (has_nav_menu('primary')) {
                     ?>
                     <nav class="hidden md:flex items-center gap-8 pb-3 text-sm font-medium text-text-dark dark:text-gray-200">
@@ -93,26 +100,20 @@
                     </nav>
                     <?php
                 } else {
-                    // Fallback: Display default menu items if menu is not set in admin
+                    // Fallback nav with dynamic product category links
                     ?>
                     <nav class="hidden md:flex items-center gap-8 pb-3 text-sm font-medium text-text-dark dark:text-gray-200">
                         <a href="<?php echo esc_url(home_url('/')); ?>"
                             class="hover:text-primary transition-colors border-b-2 border-primary">Trang chủ</a>
-                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Chăm
-                            sóc da</a>
-                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=makeup"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Trang
-                            điểm</a>
-                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=body"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Cơ
-                            thể & Tóc</a>
-                        <a href="<?php echo esc_url(home_url('/brands')); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Thương
-                            hiệu</a>
+                        <?php foreach ($nav_cats as [$slug, $label]):
+                            $term = get_term_by('slug', $slug, 'product_cat');
+                            if ($term && !is_wp_error($term)):
+                                $url = get_term_link($term, 'product_cat'); ?>
+                        <a href="<?php echo esc_url($url); ?>"
+                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50"><?php echo esc_html($label); ?></a>
+                        <?php endif; endforeach; ?>
                         <a href="<?php echo esc_url(home_url('/sale')); ?>"
-                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50 text-primary font-bold">Khuyến
-                            mãi</a>
+                            class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50 text-primary font-bold">Khuyến mãi</a>
                         <a href="<?php echo esc_url(home_url('/blog')); ?>"
                             class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/50">Blog</a>
                     </nav>
@@ -140,19 +141,18 @@
                         </nav>
                         <?php
                     } else {
-                        // Fallback: Display default menu items if menu is not set in admin
+                        // Fallback nav with dynamic product category links
                         ?>
                         <nav class="py-4 flex flex-col space-y-2">
                             <a href="<?php echo esc_url(home_url('/')); ?>"
                                 class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Trang chủ</a>
-                            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Chăm sóc da</a>
-                            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=makeup"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Trang điểm</a>
-                            <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>?cat=body"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Cơ thể & Tóc</a>
-                            <a href="<?php echo esc_url(home_url('/brands')); ?>"
-                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors">Thương hiệu</a>
+                            <?php foreach ($nav_cats as [$slug, $label]):
+                                $term = get_term_by('slug', $slug, 'product_cat');
+                                if ($term && !is_wp_error($term)):
+                                    $url = get_term_link($term, 'product_cat'); ?>
+                            <a href="<?php echo esc_url($url); ?>"
+                                class="px-4 py-2 text-sm font-medium text-text-dark dark:text-gray-200 hover:text-primary hover:bg-background-light dark:hover:bg-white/5 transition-colors"><?php echo esc_html($label); ?></a>
+                            <?php endif; endforeach; ?>
                             <a href="<?php echo esc_url(home_url('/sale')); ?>"
                                 class="px-4 py-2 text-sm font-medium text-primary font-bold hover:bg-background-light dark:hover:bg-white/5 transition-colors">Khuyến mãi</a>
                             <a href="<?php echo esc_url(home_url('/blog')); ?>"
