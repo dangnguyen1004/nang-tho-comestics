@@ -779,6 +779,83 @@ function nang_tho_shop_search($q)
 }
 
 /**
+ * Live Search AJAX Handler
+ */
+add_action('wp_ajax_nang_tho_live_search', 'nang_tho_live_search_handler');
+add_action('wp_ajax_nopriv_nang_tho_live_search', 'nang_tho_live_search_handler');
+
+function nang_tho_live_search_handler()
+{
+    check_ajax_referer('nang_tho_search_nonce', 'nonce');
+
+    $query = isset($_POST['query']) ? sanitize_text_field(wp_unslash($_POST['query'])) : '';
+
+    if (strlen($query) < 2) {
+        wp_send_json_error('Query too short');
+        return;
+    }
+
+    // Popular terms — hardcoded, filtered by query substring
+    $all_popular = [
+        'son môi', 'son môi lì', 'son dưỡng', 'son kem',
+        'kem dưỡng da', 'kem chống nắng', 'serum vitamin c',
+        'tẩy trang', 'mặt nạ', 'phấn nền', 'mascara',
+        'phấn má hồng', 'toner', 'nước tẩy trang',
+    ];
+    $popular_terms = array_values(array_slice(
+        array_filter($all_popular, fn($t) => mb_stripos($t, $query) !== false),
+        0, 2
+    ));
+
+    // Categories
+    $raw_cats = get_terms([
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => true,
+        'search'     => $query,
+        'number'     => 1,
+        'exclude'    => [(int) get_option('default_product_cat')],
+    ]);
+    $categories = [];
+    if (!is_wp_error($raw_cats) && !empty($raw_cats)) {
+        foreach ($raw_cats as $cat) {
+            $categories[] = [
+                'name'  => $cat->name,
+                'url'   => get_term_link($cat),
+                'count' => (int) $cat->count,
+            ];
+        }
+    }
+
+    // Products
+    $product_query = new WC_Product_Query([
+        's'       => $query,
+        'limit'   => 3,
+        'status'  => 'publish',
+        'orderby' => 'relevance',
+    ]);
+    $products = [];
+    foreach ($product_query->get_products() as $product) {
+        $image_id  = $product->get_image_id();
+        $image_url = $image_id
+            ? wp_get_attachment_image_url($image_id, 'thumbnail')
+            : wc_placeholder_img_src('thumbnail');
+        $products[] = [
+            'id'    => $product->get_id(),
+            'name'  => $product->get_name(),
+            'price' => wp_strip_all_tags($product->get_price_html()),
+            'image' => esc_url($image_url),
+            'url'   => esc_url($product->get_permalink()),
+        ];
+    }
+
+    wp_send_json_success([
+        'popular_terms' => $popular_terms,
+        'categories'    => $categories,
+        'products'      => $products,
+    ]);
+}
+
+/**
  * Customize WooCommerce Ordering Options
  */
 add_filter('woocommerce_catalog_orderby', 'nang_tho_custom_ordering_options');
