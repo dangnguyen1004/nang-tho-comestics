@@ -117,8 +117,6 @@
                         <?php endif; endforeach; ?>
                         <a href="<?php echo esc_url(home_url('/sale')); ?>"
                             class="<?php echo (is_page('sale') ? $nav_active : $nav_inactive); ?> text-primary font-bold">Khuyến mãi</a>
-                        <a href="<?php echo esc_url(home_url('/blog')); ?>"
-                            class="<?php echo (is_home() || is_singular('post')) ? $nav_active : $nav_inactive; ?>">Blog</a>
                     </nav>
                     <?php
                 }
@@ -161,8 +159,6 @@
                             <?php endif; endforeach; ?>
                             <a href="<?php echo esc_url(home_url('/sale')); ?>"
                                 class="<?php echo is_page('sale') ? $mob_active : 'px-4 py-2 text-sm font-medium text-primary font-bold hover:bg-background-light dark:hover:bg-white/5 transition-colors'; ?>">Khuyến mãi</a>
-                            <a href="<?php echo esc_url(home_url('/blog')); ?>"
-                                class="<?php echo (is_home() || is_singular('post')) ? $mob_active : $mob_inactive; ?>">Blog</a>
                         </nav>
                         <?php
                     }
