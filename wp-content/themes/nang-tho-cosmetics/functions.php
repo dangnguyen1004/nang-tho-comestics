@@ -463,6 +463,20 @@ function nang_tho_cosmetics_scripts()
             wp_enqueue_style('nang-tho-payment-gateway', get_template_directory_uri() . '/assets/css/payment-gateway.css', array(), _S_VERSION);
         }
 
+        // Live Search Autocomplete
+        wp_enqueue_script(
+            'nang-tho-search-autocomplete',
+            get_template_directory_uri() . '/assets/js/search-autocomplete.js',
+            [],
+            _S_VERSION,
+            true
+        );
+        wp_localize_script('nang-tho-search-autocomplete', 'nangThoSearch', [
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('nang_tho_search_nonce'),
+            'shopUrl' => wc_get_page_permalink('shop'),
+        ]);
+
         // Enqueue Shop Filters JavaScript
         if (is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy()) {
             wp_enqueue_script('nang-tho-shop-filters', get_template_directory_uri() . '/assets/js/shop-filters.js', array('jquery'), _S_VERSION, true);

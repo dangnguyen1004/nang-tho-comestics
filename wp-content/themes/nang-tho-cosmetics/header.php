@@ -38,9 +38,11 @@
                                 <span class="material-symbols-outlined text-gray-400">search</span>
                             </div>
                             <input type="search" name="s"
+                                id="search-input-desktop"
                                 class="block w-full pl-10 pr-3 py-2.5 border border-transparent rounded-lg leading-5 bg-background-light dark:bg-white/5 text-text-dark dark:text-white placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-white/10 focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition duration-150 ease-in-out"
                                 placeholder="<?php echo esc_attr_x('Tìm kiếm sản phẩm, thương hiệu...', 'placeholder', 'nang-tho-cosmetics'); ?>"
-                                value="<?php echo isset($_GET['s']) ? esc_attr($_GET['s']) : ''; ?>" />
+                                value="<?php echo isset($_GET['s']) ? esc_attr($_GET['s']) : ''; ?>"
+                                autocomplete="off" />
                             <button type="submit"
                                 class="absolute inset-y-0 right-0 px-4 py-1 m-1 rounded-md bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
                                 Tìm kiếm
